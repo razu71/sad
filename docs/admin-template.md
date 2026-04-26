@@ -231,6 +231,8 @@ Build these first under `src/components/ui/`:
 - `Tooltip`
 - `Typography`
 
+For table use `@tanstack/vue-table` package
+
 (only if you want a component wrapper around validation state)
 
 ### Toasts
@@ -243,7 +245,6 @@ Create these in `src/components/app/`:
 - `AppLogo.vue` (brand mark; Sunrise Orange accents)
 - `PageHeader.vue` (title/description/actions)
 - `StatCard.vue` (dashboard metric card)
-- `DataTableShell.vue` (filter row + table + pagination slot)
 - `ConfirmDialog.vue` (wrapper around Dialog)
 - `EmptyState.vue`
 
