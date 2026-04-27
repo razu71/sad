@@ -1,27 +1,52 @@
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import Breadcrumb from '@/components/ui/Breadcrumb.vue'
+import { adminNav } from '@/lib/nav'
 
-type Crumb = { label: string; to: string }
+type Crumb = { label: string; to?: string }
 
-export default defineComponent({
-  setup() {
-    const route = useRoute()
-    const crumbs = computed<Crumb[]>(() => {
-      const matched = route.matched.filter((r) => typeof r.meta?.title === 'string' && r.path)
-      return matched.map((r) => ({ label: String(r.meta.title), to: r.path }))
-    })
-    return { crumbs }
-  },
+const props = defineProps<{
+  items?: Crumb[]
+}>()
+
+const route = useRoute()
+
+function findLabel(path: string): string | undefined {
+  const stack = [...adminNav]
+  while (stack.length) {
+    const item = stack.shift()
+    if (!item) {
+      continue
+    }
+
+    if (item.to === path) {
+      return item.label
+    }
+
+    if (item.children?.length) {
+      stack.push(...item.children)
+    }
+  }
+
+  return undefined
+}
+
+const crumbs = computed<Crumb[]>(() => {
+  if (props.items?.length) {
+    return props.items
+  }
+
+  return route.matched
+    .filter((record) => record.path)
+    .map((record) => ({
+      label: typeof record.meta?.title === 'string' ? String(record.meta.title) : (findLabel(record.path) ?? record.path),
+      to: record.path,
+    }))
 })
 </script>
 
 <template>
-  <div class="flex items-center gap-2 text-sm text-[var(--topbar-text)]/80">
-    <template v-for="(c, idx) in crumbs" :key="c.to">
-      <span v-if="idx !== 0" class="text-[var(--topbar-text)]/40">/</span>
-      <RouterLink class="hover:text-[var(--topbar-text)]" :to="c.to">{{ c.label }}</RouterLink>
-    </template>
-  </div>
+  <Breadcrumb :items="crumbs" />
 </template>
 
