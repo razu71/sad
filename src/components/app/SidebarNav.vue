@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { ChevronDown, ChevronLeft, ChevronRight, Menu } from 'lucide-vue-next'
+import { ChevronDown, ChevronRight } from 'lucide-vue-next'
 import { RouterLink, useRoute } from 'vue-router'
 import type { NavItem } from '@/types/NavItem'
 import { nav } from '@/lib/nav'
@@ -14,7 +14,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  'update:collapsed': [value: boolean]
   navigate: [to: string | undefined]
 }>()
 
@@ -55,17 +54,8 @@ function isAllowed(item: NavItem) {
 
 <template>
   <div class="h-full">
-    <div class="flex items-center justify-between px-2 py-2">
+    <div class="flex items-center px-2 py-2">
       <AppLogo :collapsed="collapsed" />
-      <button
-        type="button"
-        class="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--sidebar-text)] hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]"
-        :aria-label="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
-        @click="emit('update:collapsed', !collapsed)"
-      >
-        <ChevronRight v-if="collapsed" class="h-4 w-4" />
-        <ChevronLeft v-else class="h-4 w-4" />
-      </button>
     </div>
     <nav aria-label="Primary" :class="cn('flex flex-col gap-1 px-2 py-2', collapsed ? 'items-center' : '')">
     <template v-for="item in nav.filter(isAllowed)" :key="itemKey(item)">

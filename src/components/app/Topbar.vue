@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Bell, Menu } from 'lucide-vue-next'
+import { Bell, ChevronLeft, ChevronRight, Menu } from 'lucide-vue-next'
 import Breadcrumbs from '@/components/app/Breadcrumbs.vue'
 import NotificationsPanel, { type NotificationItem } from '@/components/app/NotificationsPanel.vue'
 import ThemeToggle from '@/components/app/ThemeToggle.vue'
@@ -20,6 +20,10 @@ function openMobileMenu() {
   ui.setMobileOpen(true)
 }
 
+function toggleSidebar() {
+  ui.setCollapsed(!ui.collapsed)
+}
+
 function markAllRead() {
   notifications.value = notifications.value.map((item) => ({ ...item, read: true }))
 }
@@ -30,6 +34,10 @@ function markAllRead() {
     <div class="flex items-center gap-4">
       <Button variant="ghost" size="icon" class="md:hidden" aria-label="Open menu" @click="openMobileMenu">
         <Menu class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="hidden md:inline-flex" :aria-label="ui.collapsed ? 'Expand sidebar' : 'Collapse sidebar'" @click="toggleSidebar">
+        <ChevronRight v-if="ui.collapsed" class="h-4 w-4" />
+        <ChevronLeft v-else class="h-4 w-4" />
       </Button>
       <Breadcrumbs />
     </div>
