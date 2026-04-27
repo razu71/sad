@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ColumnDef } from '@tanstack/vue-table'
 import { Users } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import Breadcrumbs from '@/components/app/Breadcrumbs.vue'
 import PageHeader from '@/components/app/PageHeader.vue'
 import StatCard from '@/components/app/StatCard.vue'
@@ -55,8 +55,26 @@ const cb = ref(false)
 const pgIn = ref('')
 const pgTa = ref('')
 const toggleB = ref(false)
-const dtRows: { id: string; a: string }[] = []
-const dtCols: ColumnDef<{ id: string; a: string }>[] = [{ id: 'a', accessorKey: 'a', header: 'A' }]
+type PlaygroundTableRow = Record<string, unknown> & {
+  id: string
+  name: string
+  role: string
+  status: string
+}
+
+const dtRows: PlaygroundTableRow[] = [
+  { id: '1', name: 'Alpha Design', role: 'Admin', status: 'Active' },
+  { id: '2', name: 'Beta Labs', role: 'Editor', status: 'Active' },
+  { id: '3', name: 'Gamma Co', role: 'Viewer', status: 'Inactive' },
+  { id: '4', name: 'Delta Systems', role: 'Editor', status: 'Active' },
+  { id: '5', name: 'Epsilon Inc', role: 'Viewer', status: 'Pending' },
+]
+
+const dtCols = computed<ColumnDef<PlaygroundTableRow>[]>(() => [
+  { accessorKey: 'name', header: 'Name', enableSorting: true },
+  { accessorKey: 'role', header: 'Role', enableSorting: true },
+  { accessorKey: 'status', header: 'Status', enableSorting: true },
+])
 
 const accordionItems = [
   { id: '1', title: 'First item', content: 'Hidden content for regression checks.' },
@@ -188,7 +206,10 @@ const accordionItems = [
         </Drawer>
       </div>
 
-      <div v-show="playgroundTab === 'data'" class="mt-6 space-y-6">
+      <div v-show="playgroundTab === 'data'" class="mt-6 space-y-8">
+        <section>
+          <Typography as="h2" variant="h2" class="mb-1">Badges</Typography>
+          <Typography as="p" variant="muted" class="mb-3 text-sm">Semantic status colors.</Typography>
         <div class="flex flex-wrap gap-2">
           <Badge>Default</Badge>
           <Badge variant="primary">Primary</Badge>
@@ -197,28 +218,52 @@ const accordionItems = [
           <Badge variant="warning">Warning</Badge>
           <Badge variant="destructive">Destructive</Badge>
         </div>
+        </section>
+        <section>
+          <Typography as="h2" variant="h2" class="mb-1">Table (primitive)</Typography>
+          <Typography as="p" variant="muted" class="mb-3 text-sm">Bordered shell — one table root via the Table component.</Typography>
         <Table>
-          <table>
-            <thead>
-              <tr>
-                <th class="border-b border-[var(--border)] p-2 text-left">Col</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="p-2">Cell</td>
-              </tr>
-            </tbody>
-          </table>
+          <thead>
+            <tr class="text-left text-xs font-medium text-[var(--muted-foreground)]">
+              <th class="border-b border-[var(--border)] p-2">Label</th>
+              <th class="border-b border-[var(--border)] p-2">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[var(--border)] last:border-0">
+              <td class="p-2 text-sm">Region</td>
+              <td class="p-2 text-sm text-[var(--muted-foreground)]">us-east-1</td>
+            </tr>
+            <tr>
+              <td class="p-2 text-sm">Status</td>
+              <td class="p-2 text-sm text-[var(--muted-foreground)]">Healthy</td>
+            </tr>
+          </tbody>
         </Table>
-        <DataTable :columns="dtCols" :data="dtRows" :empty="{ title: 'No rows', description: 'DataTable empty slot' }" />
+        </section>
+        <section>
+          <Typography as="h2" variant="h2" class="mb-1">Data table (TanStack)</Typography>
+          <Typography as="p" variant="muted" class="mb-3 text-sm">Sortable columns, client pagination, and empty state.</Typography>
+        <DataTable
+          :columns="dtCols"
+          :data="dtRows"
+          :page-size="3"
+          :empty="{ title: 'No organizations', description: 'Import or create a record to get started.' }"
+        />
+        </section>
+        <section>
+          <Typography as="h2" variant="h2" class="mb-1">Pagination</Typography>
         <Pagination
           :page="page"
           :page-size="10"
           :total="25"
           @update:page="page = $event"
         />
+        </section>
+        <section>
+          <Typography as="h2" variant="h2" class="mb-1">Chart</Typography>
         <Chart type="bar" :data="{}" />
+        </section>
       </div>
 
       <div v-show="playgroundTab === 'navigation'" class="mt-6 space-y-6">

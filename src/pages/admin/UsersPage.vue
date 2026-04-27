@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/zod'
+import type { ColumnDef } from '@tanstack/vue-table'
 import { useField, useForm } from 'vee-validate'
-import { computed, ref, unref, watch } from 'vue'
-import { MoreHorizontal } from 'lucide-vue-next'
+import { computed, h, ref, unref, watch } from 'vue'
 import { useToast } from '@/components/ui/Toast'
+import UserRowActions from '@/components/app/UserRowActions.vue'
 import Avatar from '@/components/ui/Avatar.vue'
 import Badge from '@/components/ui/Badge.vue'
 import Button from '@/components/ui/Button.vue'
 import ConfirmDialog from '@/components/app/ConfirmDialog.vue'
 import Dialog from '@/components/ui/Dialog.vue'
-import DropdownMenu from '@/components/ui/DropdownMenu.vue'
+import DataTable from '@/components/ui/DataTable.vue'
 import Field from '@/components/ui/Field.vue'
 import Input from '@/components/ui/Input.vue'
 import Label from '@/components/ui/Label.vue'
 import NativeSelect from '@/components/ui/NativeSelect.vue'
 import PageHeader from '@/components/app/PageHeader.vue'
 import Switch from '@/components/ui/Switch.vue'
-import Table from '@/components/ui/Table.vue'
 import { fieldErrorDisplay } from '@/lib/form/fieldErrorDisplay'
 import { focusFirstErrorField } from '@/lib/form/focusFirstErrorField'
 import { formatDate } from '@/lib/utils'
@@ -48,7 +48,6 @@ const dialogOpen = ref(false)
 const editingId = ref<string | null>(null)
 const deleteTarget = ref<UserRow | null>(null)
 const confirmOpen = ref(false)
-const actionMenu = ref<string | null>(null)
 
 const nameId = 'user-form-name'
 const emailId = 'user-form-email'
@@ -95,6 +94,58 @@ const filtered = computed(() => {
 
 const dialogTitle = computed(() => (editingId.value ? 'Edit user' : 'Add user'))
 
+const columns = computed<ColumnDef<UserRow>[]>(() => [
+  {
+    id: 'user',
+    accessorKey: 'name',
+    header: 'User',
+    enableSorting: true,
+    cell: (info) => {
+      const u = info.row.original
+      return h('div', { class: 'flex items-center gap-2' }, [
+        h(Avatar, { alt: u.name, fallback: u.name, size: 'sm' }),
+        h('span', { class: 'text-sm font-medium text-[var(--foreground)]' }, u.name),
+      ])
+    },
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    enableSorting: true,
+    cell: (info) => h('span', { class: 'text-sm text-[var(--muted-foreground)]' }, String(info.getValue() ?? '')),
+  },
+  {
+    accessorKey: 'role',
+    header: 'Role',
+    enableSorting: true,
+    cell: (info) => h(Badge, { variant: 'secondary' }, { default: () => String(info.getValue() ?? '') }),
+  },
+  {
+    id: 'active',
+    accessorKey: 'active',
+    header: 'Status',
+    enableSorting: false,
+    cell: (info) => {
+      const u = info.row.original
+      return h(Switch, { modelValue: u.active, 'onUpdate:modelValue': (v: boolean) => toggleUserActive(u, v) })
+    },
+  },
+  {
+    accessorKey: 'created',
+    header: 'Created',
+    enableSorting: true,
+    cell: (info) =>
+      h('span', { class: 'text-sm text-[var(--muted-foreground)]' }, formatDate(String(info.getValue() ?? ''))),
+  },
+  {
+    id: 'actions',
+    header: '',
+    enableSorting: false,
+    cell: (info) =>
+      h(UserRowActions, { user: info.row.original, onEdit: () => openEdit(info.row.original), onRemove: () => askDelete(info.row.original) }),
+  },
+])
+
 function openAdd() {
   editingId.value = null
   resetForm()
@@ -110,13 +161,11 @@ function openEdit(u: UserRow) {
     active: u.active,
   })
   dialogOpen.value = true
-  actionMenu.value = null
 }
 
 function askDelete(u: UserRow) {
   deleteTarget.value = u
   confirmOpen.value = true
-  actionMenu.value = null
 }
 
 const submitUser = handleSubmit(
@@ -198,65 +247,13 @@ watch(dialogOpen, (open) => {
       </NativeSelect>
     </div>
 
-    <Table>
-      <table>
-        <thead>
-          <tr class="border-b border-[var(--border)] text-left text-xs font-medium text-[var(--muted-foreground)]">
-            <th class="p-2">User</th>
-            <th class="p-2">Email</th>
-            <th class="p-2">Role</th>
-            <th class="p-2">Status</th>
-            <th class="p-2">Created</th>
-            <th class="w-12 p-2" />
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="u in filtered" :key="u.id" class="border-b border-[var(--border)] last:border-0">
-            <td class="p-2">
-              <div class="flex items-center gap-2">
-                <Avatar :alt="u.name" :fallback="u.name" size="sm" />
-                <span class="text-sm font-medium text-[var(--foreground)]">{{ u.name }}</span>
-              </div>
-            </td>
-            <td class="p-2 text-sm text-[var(--muted-foreground)]">{{ u.email }}</td>
-            <td class="p-2">
-              <Badge variant="secondary">{{ u.role }}</Badge>
-            </td>
-            <td class="p-2">
-              <Switch :model-value="u.active" @update:model-value="(v) => toggleUserActive(u, v as boolean)" />
-            </td>
-            <td class="p-2 text-sm text-[var(--muted-foreground)]">{{ formatDate(u.created) }}</td>
-            <td class="p-2 text-right">
-              <DropdownMenu
-                :open="actionMenu === u.id"
-                @update:open="(o: boolean) => { actionMenu = o ? u.id : null }"
-              >
-                <template #trigger>
-                  <Button size="icon" variant="ghost" :aria-label="`Actions for ${u.name}`">
-                    <MoreHorizontal class="h-4 w-4" />
-                  </Button>
-                </template>
-                <li>
-                  <button type="button" role="menuitem" class="flex w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm hover:bg-[var(--accent)]" @click="openEdit(u)">
-                    Edit
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    role="menuitem"
-                    class="flex w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm text-[var(--destructive)] hover:bg-[var(--accent)]"
-                    @click="askDelete(u)"
-                  >
-                    Delete
-                  </button>
-                </li>
-              </DropdownMenu>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </Table>
+    <DataTable
+      :columns="columns"
+      :data="filtered"
+      :pagination="false"
+      :sorting="true"
+      :empty="{ title: 'No users', description: 'Try adjusting search or filters.' }"
+    />
 
     <Dialog :open="dialogOpen" :title="dialogTitle" @update:open="dialogOpen = $event">
       <form class="space-y-4" @submit.prevent="submitUser">

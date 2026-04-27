@@ -21,7 +21,7 @@ async function logout() {
 </script>
 
 <template>
-  <Popover :open="open" @update:open="open = $event">
+  <Popover :open="open" align="end" @update:open="open = $event">
     <template #trigger>
       <button type="button" class="inline-flex items-center rounded-full focus-visible:ring-2 focus-visible:ring-[var(--ring)]" aria-label="Open user menu">
         <Avatar :alt="auth.user?.name ?? 'User'" :fallback="auth.user?.name ?? 'U'" size="sm" />

@@ -6,7 +6,7 @@ import { buttonSizeClasses, buttonVariantClasses } from '@/lib/variants'
 import { cn } from '@/lib/utils'
 import Spinner from '@/components/ui/Spinner.vue'
 
-const baseClass = 'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50'
+const baseClass = 'inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50'
 
 const props = withDefaults(
   defineProps<{

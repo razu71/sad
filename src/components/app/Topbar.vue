@@ -29,16 +29,16 @@ function markAllRead() {
 </script>
 
 <template>
-  <header class="flex h-14 items-center justify-between gap-4 border-b border-[var(--topbar-border)] bg-[var(--topbar-bg)] px-4 text-[var(--topbar-text)]">
+  <header class="relative z-20 flex h-14 items-center justify-between gap-4 overflow-visible border-b border-[var(--topbar-border)] bg-[var(--topbar-bg)] px-4 text-[var(--topbar-text)]">
     <div class="flex items-center gap-4">
       <Button variant="ghost" size="icon" class="md:hidden" aria-label="Open menu" @click="openMobileMenu">
         <Menu class="h-4 w-4" />
       </Button>
       <Breadcrumbs />
     </div>
-    <div class="flex items-center gap-2">
+    <div class="relative z-20 flex items-center gap-2 [overflow:visible]">
       <ThemeToggle variant="icon" />
-      <Popover :open="notificationOpen" @update:open="notificationOpen = $event">
+      <Popover :open="notificationOpen" align="end" @update:open="notificationOpen = $event">
         <template #trigger>
           <Button variant="ghost" size="icon" class="relative" aria-label="Open notifications">
             <Bell class="h-4 w-4" />
