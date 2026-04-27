@@ -57,7 +57,7 @@ function isAllowed(item: NavItem) {
     <div class="flex items-center px-2 py-2">
       <AppLogo :collapsed="collapsed" />
     </div>
-    <nav aria-label="Primary" :class="cn('flex flex-col gap-1 px-2 py-2', collapsed ? 'items-center' : '')">
+    <nav aria-label="Primary" class="flex flex-col gap-1 px-2 py-2">
     <template v-for="item in nav.filter(isAllowed)" :key="itemKey(item)">
       <Collapsible v-if="item.children?.length && !collapsed" :open="Boolean(submenuOpen[itemKey(item)])" @update:open="submenuOpen[itemKey(item)] = $event">
         <template #trigger>
@@ -74,7 +74,7 @@ function isAllowed(item: NavItem) {
             <RouterLink
               v-if="hasTo(child)"
               :to="child.to"
-              class="block rounded-[var(--radius-sm)] px-2 py-1.5 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
+              class="block rounded-[var(--radius-sm)] px-2 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
               @click="emit('navigate', toPath(child))"
             >
               {{ child.label }}
@@ -82,7 +82,7 @@ function isAllowed(item: NavItem) {
             <a
               v-else
               :href="child.href"
-              class="block rounded-[var(--radius-sm)] px-2 py-1.5 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
+              class="block rounded-[var(--radius-sm)] px-2 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
               @click="emit('navigate', toPath(child))"
             >
               {{ child.label }}
@@ -96,18 +96,18 @@ function isAllowed(item: NavItem) {
             v-if="hasTo(item)"
             :to="item.to"
             :class="cn(
-              'relative flex w-10 items-center justify-center rounded-[var(--radius-md)] px-0 py-2 text-sm text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]',
-              isActive(item) ? 'bg-[var(--sidebar-active-bg)] text-[var(--sidebar-active-text)]' : ''
+              'relative flex h-10 w-full items-center rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]',
+              isActive(item) ? ' text-[var(--sidebar-active-text)]' : ''
             )"
             @click="emit('navigate', toPath(item))"
           >
-            <span v-if="isActive(item)" class="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded bg-[var(--primary)]" />
+            <span v-if="isActive(item)" class="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded" />
             <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
           </RouterLink>
           <a
             v-else-if="item.href"
             :href="item.href"
-            class="relative flex w-10 items-center justify-center rounded-[var(--radius-md)] px-0 py-2 text-sm text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]"
+            class="relative flex h-10 w-full items-center rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
           >
             <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
           </a>
@@ -117,12 +117,12 @@ function isAllowed(item: NavItem) {
         v-else-if="hasTo(item)"
         :to="item.to"
         :class="cn(
-          'relative flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]',
-          isActive(item) ? 'bg-[var(--sidebar-active-bg)] text-[var(--sidebar-active-text)]' : ''
+          'relative flex h-10 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]',
+          isActive(item) ? 'text-[var(--sidebar-active-text)]' : ''
         )"
         @click="emit('navigate', toPath(item))"
       >
-        <span v-if="isActive(item)" class="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded bg-[var(--primary)]" />
+        <span v-if="isActive(item)" class="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded" />
         <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
         <span class="truncate">{{ item.label }}</span>
         <ChevronRight v-if="item.children?.length" class="ml-auto h-4 w-4" />
@@ -130,7 +130,7 @@ function isAllowed(item: NavItem) {
       <a
         v-else-if="item.href"
         :href="item.href"
-        class="relative flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]"
+        class="relative flex h-10 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
       >
         <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
         <span class="truncate">{{ item.label }}</span>
