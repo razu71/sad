@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<{
   size?: 'sm' | 'md' | 'lg'
   id?: string
   autocomplete?: string
+  ariaDescribedby?: string
   class?: string
 }>(), {
   type: 'text',
@@ -51,6 +52,7 @@ function onInput(event: Event) {
       :readonly="readonly"
       :autocomplete="autocomplete"
       :aria-invalid="invalid || undefined"
+      :aria-describedby="ariaDescribedby || undefined"
       :class="cn('w-full rounded-[var(--radius-md)] border bg-[var(--input)] text-[var(--foreground)] outline-none transition focus-visible:ring-2 focus-visible:ring-[var(--ring)]', invalid ? 'border-[var(--destructive)]' : 'border-[var(--border)]', sizeClass, props.class)"
       @input="onInput"
       @change="emit('change', $event)"
