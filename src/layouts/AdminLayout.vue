@@ -27,6 +27,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
         <div class="flex h-14 items-center justify-between px-3">
           <div class="min-w-0">
             <span v-if="!collapsed" class="truncate font-semibold text-[var(--sidebar-text)]">Admin</span>
+            <span v-else class="truncate font-semibold text-[var(--sidebar-text)]">A</span>
           </div>
           <button
             class="rounded-md p-2 text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-bg)]/10 hover:text-[var(--sidebar-text)]"

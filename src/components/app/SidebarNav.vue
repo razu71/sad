@@ -5,7 +5,7 @@ export default {}
 <script setup lang="ts">
 import { RouterLink, useRoute } from 'vue-router'
 import { computed } from 'vue'
-import type { NavItem } from '@/lib/nav'
+import type { NavItem } from '@/types/NavItem'
 import { cn } from '@/lib/utils'
 
 const props = defineProps<{
