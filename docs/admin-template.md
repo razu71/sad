@@ -8,6 +8,7 @@ This document is the implementation roadmap for turning this project into a **fu
 - Pinia (already installed)
 - Vue Router (already installed)
 - lucide/vue icons (already installed)
+- Don't use any svg icon or static icon, always use icon from lucide/vue icons
 
 ## Non-negotiables
 
@@ -20,14 +21,9 @@ This document is the implementation roadmap for turning this project into a **fu
 ## Brand palette (must be applied)
 
 - **Deep night** `#1B3A4B` — primary dark (navbar, sidebar, footer)
-- **Sunrise Orange** `#E8894A` — brand primary (CTA, logo, primary button)
+- **Sunrise Orange** `#E8894A` — brand primary (CTA, logo, primary button) 
 - **River teal** `#2E9E8F` — secondary/success/links
-- **Kuasha Mist** `#FDF4EC` — primary light (background, cards)
-
-## Target UX (default)
-
-- **Sidebar + Topbar layout** with responsive mobile drawer.
-- **Mock auth** (Pinia + localStorage) with **route guards** (no backend).
+- **White** `#FFFFFF` — primary light (background, cards)
 
 ## Phase 0 — Project structure & conventions
 
@@ -67,7 +63,6 @@ Create these directories:
 ### Recommended utilities (already installed in this repo)
 
 - `clsx` + `tailwind-merge` via a `cn()` helper in `src/lib/utils.ts`
-- `class-variance-authority` (CVA) for typed variant props (e.g. `variant="primary" size="sm"`)
 
 ## Phase 2 — Theme tokens (Tailwind + CSS variables) using your palette
 
@@ -111,6 +106,22 @@ UI primitives (hand-built):
 - `DropdownMenu` (user menu)
 - `Separator`
 - `Button`
+
+## Layout requirements
+### Admin layout
+- **Sidebar** with responsive mobile drawer. Sidebar can be collapsed with animation on click on an icon. At sidebar should have a logo and a title at the very top. Next bottom should have a list of menu items. Menu items should be clickable and should navigate to the corresponding page. On collapse should show a hamburger icon. On hover color should be changed to the primary color.
+- **Topbar** should have a breadcrumb (left side) and a action slot like notification icon, user menu icon (right side). Breadcrumb should be clickable and should navigate to the corresponding page. Notification icon should be clickable and should show a modal. User menu icon should be clickable and should show a dropdown menu with user profile page and logout option.
+- **Footer** should have a copyright text and a version text.
+- **Main content** should be the page content.
+
+### Auth layout
+- **Mock auth** (Pinia + localStorage) with 
+- **route guards** (no backend).
+- **Login page** should have a form with email and password fields. Should have a remember me checkbox and a login button. Should have a forgot password link. Should have a sign up link. At the bottom should have a social login buttons.
+- **Sign up page** should have a form with name, email and password fields. Should have a sign up button. At the bottom should have a social login buttons.
+- **Forgot password page** should have a form with email field. Should have a reset password button. At the bottom should have a social login buttons.
+- **Reset password page** should have a form with password and confirm password fields. Should have a reset password button. At the bottom should have a social login buttons.
+- **404 page** should have a 404 error message and a back to home link. At the bottom should have a social login buttons.
 
 App components (composed):
 
