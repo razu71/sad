@@ -973,7 +973,7 @@ Actions:
   - Focus the first invalid field.
   - Show a page-level `Alert` only for non-field errors (e.g. "Login failed").
 
-### Option A (recommended) — `vee-validate` + `zod` (**requires install confirmation**)
+### `vee-validate` + `zod` (**requires install confirmation**)
 
 Why: strong TS typing, schema-driven validation, great real-time support (`validateOnInput`).
 
@@ -989,50 +989,6 @@ Pattern:
 - Wire the schema into a `useForm()` from `vee-validate`.
 - Use `validateOnInput: true` for real-time errors.
 - Bind field state to `Field` UI primitive via `meta.touched` + `errorMessage`.
-
-### Option B (no new deps) — composable validators
-
-Files:
-
-- `src/composables/useField.ts`
-- `src/composables/useForm.ts`
-- `src/composables/rules.ts` (rule factories)
-
-`useField<T>(initialValue, rules)` exposes:
-
-- `value: Ref<T>`
-- `error: ComputedRef<string | null>`
-- `valid: ComputedRef<boolean>`
-- `dirty: Ref<boolean>` (set to `true` on first change)
-- `touched: Ref<boolean>` (set to `true` on `onBlur()`)
-- `onBlur(): void`
-- `validate(): boolean`
-- `reset(): void`
-
-`useForm()` exposes:
-
-- `register(field): void`
-- `isSubmitting: Ref<boolean>`
-- `submitted: Ref<boolean>`
-- `valid: ComputedRef<boolean>`
-- `validateAll(): boolean` — sets `submitted = true`, runs every field's `validate()`.
-- `handleSubmit(fn): (e?: Event) => Promise<void>`
-
-Rules (`src/composables/rules.ts`):
-
-- `required(message?)`
-- `minLength(n, message?)`
-- `maxLength(n, message?)`
-- `email(message?)`
-- `pattern(regex, message?)`
-- `sameAs(otherRef, message?)`
-
-Real-time wiring inside `useField`:
-
-- `watch(value, () => { if (dirty.value || submitted.value) validate() })`
-- `onBlur` sets `touched = true` and runs `validate()`.
-
----
 
 ## Phase 9 — Starter pages
 

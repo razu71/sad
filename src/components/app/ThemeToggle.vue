@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed } from 'vue'
 import { Check, Monitor, Moon, Sun } from 'lucide-vue-next'
 import Button from '@/components/ui/Button.vue'
 import type { ThemePreference } from '@/stores/ui'
@@ -12,44 +12,17 @@ const props = withDefaults(defineProps<{
 })
 
 const ui = useUiStore()
-const systemPrefersDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
-const media = window.matchMedia('(prefers-color-scheme: dark)')
-
-function syncSystemTheme(event: MediaQueryListEvent) {
-  systemPrefersDark.value = event.matches
-}
-
-onMounted(() => media.addEventListener('change', syncSystemTheme))
-onUnmounted(() => media.removeEventListener('change', syncSystemTheme))
-
-const resolvedTheme = computed<'light' | 'dark'>(() => {
-  if (ui.theme === 'system') {
-    return systemPrefersDark.value ? 'dark' : 'light'
-  }
-
-  return ui.theme
-})
 
 const themeIcon = computed(() => {
   if (ui.theme === 'system') {
     return Monitor
   }
 
-  return resolvedTheme.value === 'dark' ? Moon : Sun
+  return ui.resolvedTheme === 'dark' ? Moon : Sun
 })
 
 function setTheme(theme: ThemePreference) {
   ui.setTheme(theme)
-}
-
-function cycleTheme() {
-  if (ui.theme === 'light') {
-    setTheme('dark')
-  } else if (ui.theme === 'dark') {
-    setTheme('system')
-  } else {
-    setTheme('light')
-  }
 }
 </script>
 
@@ -59,7 +32,7 @@ function cycleTheme() {
     variant="ghost"
     size="icon"
     aria-label="Toggle theme"
-    @click="cycleTheme"
+    @click="ui.cycleTheme()"
   >
     <component :is="themeIcon" class="h-4 w-4" />
   </Button>

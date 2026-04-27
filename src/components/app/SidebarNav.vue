@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { ChevronDown, ChevronRight } from 'lucide-vue-next'
+import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { RouterLink, useRoute } from 'vue-router'
 import type { NavItem } from '@/types/NavItem'
 import { nav } from '@/lib/nav'
 import AppLogo from '@/components/app/AppLogo.vue'
+import Button from '@/components/ui/Button.vue'
 import Collapsible from '@/components/ui/Collapsible.vue'
 import Tooltip from '@/components/ui/Tooltip.vue'
 import { cn } from '@/lib/utils'
@@ -15,6 +16,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   navigate: [to: string | undefined]
+  'update:collapsed': [value: boolean]
 }>()
 
 const route = useRoute()
@@ -53,11 +55,15 @@ function isAllowed(item: NavItem) {
 </script>
 
 <template>
-  <div class="h-full">
-    <div class="flex items-center px-2 py-2">
+  <div class="h-full flex flex-col">
+    <div class="flex items-center gap-1 border-b border-[var(--border)] px-2 py-2" :class="collapsed ? 'flex-col' : 'justify-between'">
       <AppLogo :collapsed="collapsed" />
+      <Button variant="ghost" size="icon" type="button" :aria-label="collapsed ? 'Expand sidebar' : 'Collapse sidebar'" @click="emit('update:collapsed', !collapsed)">
+        <ChevronLeft v-if="!collapsed" class="h-4 w-4" />
+        <ChevronRight v-else class="h-4 w-4" />
+      </Button>
     </div>
-    <nav aria-label="Primary" class="flex flex-col gap-1 px-2 py-2">
+    <nav aria-label="Primary" class="flex flex-col gap-1 overflow-y-auto px-2 py-2">
     <template v-for="item in nav.filter(isAllowed)" :key="itemKey(item)">
       <Collapsible v-if="item.children?.length && !collapsed" :open="Boolean(submenuOpen[itemKey(item)])" @update:open="submenuOpen[itemKey(item)] = $event">
         <template #trigger>

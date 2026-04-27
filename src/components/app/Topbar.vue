@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Bell, ChevronLeft, ChevronRight, Menu } from 'lucide-vue-next'
+import { computed, ref } from 'vue'
+import { Bell, Menu } from 'lucide-vue-next'
 import Breadcrumbs from '@/components/app/Breadcrumbs.vue'
 import NotificationsPanel, { type NotificationItem } from '@/components/app/NotificationsPanel.vue'
 import ThemeToggle from '@/components/app/ThemeToggle.vue'
 import UserMenu from '@/components/app/UserMenu.vue'
+import Badge from '@/components/ui/Badge.vue'
 import Button from '@/components/ui/Button.vue'
 import Popover from '@/components/ui/Popover.vue'
 import { useUiStore } from '@/stores/ui'
@@ -16,12 +17,10 @@ const notifications = ref<NotificationItem[]>([
   { id: '2', title: 'Theme switched successfully', time: '5m ago', read: false },
 ])
 
-function openMobileMenu() {
-  ui.setMobileOpen(true)
-}
+const unreadCount = computed(() => notifications.value.filter((item) => !item.read).length)
 
-function toggleSidebar() {
-  ui.setCollapsed(!ui.collapsed)
+function openMobileMenu() {
+  ui.openMobileDrawer()
 }
 
 function markAllRead() {
@@ -35,18 +34,17 @@ function markAllRead() {
       <Button variant="ghost" size="icon" class="md:hidden" aria-label="Open menu" @click="openMobileMenu">
         <Menu class="h-4 w-4" />
       </Button>
-      <Button variant="ghost" size="icon" class="hidden md:inline-flex" :aria-label="ui.collapsed ? 'Expand sidebar' : 'Collapse sidebar'" @click="toggleSidebar">
-        <ChevronRight v-if="ui.collapsed" class="h-4 w-4" />
-        <ChevronLeft v-else class="h-4 w-4" />
-      </Button>
       <Breadcrumbs />
     </div>
     <div class="flex items-center gap-2">
       <ThemeToggle variant="icon" />
       <Popover :open="notificationOpen" @update:open="notificationOpen = $event">
         <template #trigger>
-          <Button variant="ghost" size="icon" aria-label="Open notifications">
+          <Button variant="ghost" size="icon" class="relative" aria-label="Open notifications">
             <Bell class="h-4 w-4" />
+            <Badge v-if="unreadCount > 0" variant="destructive" size="sm" class="absolute -right-0.5 -top-0.5 min-w-[1.125rem] justify-center px-1">
+              {{ unreadCount > 9 ? '9+' : unreadCount }}
+            </Badge>
           </Button>
         </template>
         <NotificationsPanel :notifications="notifications" @mark-all-read="markAllRead" />

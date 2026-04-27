@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,6 +8,23 @@ const router = createRouter({
     {
       path: '/',
       redirect: { name: 'AdminDashboard' },
+    },
+    {
+      path: '/auth',
+      component: AuthLayout,
+      meta: { title: 'Auth' },
+      children: [
+        {
+          path: '',
+          redirect: '/auth/login',
+        },
+        {
+          path: 'login',
+          name: 'AuthLogin',
+          component: () => import('@/pages/auth/LoginPage.vue'),
+          meta: { title: 'Sign in' },
+        },
+      ],
     },
     {
       path: '/admin',

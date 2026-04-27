@@ -14,17 +14,7 @@ const ui = useUiStore()
 const router = useRouter()
 const open = ref(false)
 
-const resolvedThemeIcon = computed(() => {
-  if (ui.theme === 'dark') {
-    return Moon
-  }
-
-  if (ui.theme === 'light') {
-    return Sun
-  }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? Moon : Sun
-})
+const resolvedThemeIcon = computed(() => (ui.resolvedTheme === 'dark' ? Moon : Sun))
 
 async function logout() {
   auth.clearSession()
