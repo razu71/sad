@@ -8,7 +8,7 @@ import SidebarNav from '@/components/app/SidebarNav.vue'
 import { adminNav } from '@/lib/nav'
 import { cn } from '@/lib/utils'
 import { useUiStore } from '@/stores/ui'
-import { CircleArrowLeft, CircleArrowRight } from 'lucide-vue-next'
+import { CircleArrowLeft, CircleArrowRight, Menu } from 'lucide-vue-next'
 
 const uiStore = useUiStore()
 const { collapsed, mobileOpen } = storeToRefs(uiStore)
@@ -29,7 +29,15 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
             <span v-if="!collapsed" class="truncate font-semibold text-[var(--sidebar-text)]">Admin</span>
             <span v-else class="truncate font-semibold text-[var(--sidebar-text)]">A</span>
           </div>
-          <button
+        </div>
+        <SidebarNav :items="adminNav" :collapsed="collapsed" />
+      </aside>
+
+      <div class="flex min-w-0 flex-1 flex-col">
+        <Topbar>
+          <template #collapse-sidebar>
+            
+            <button
             class="rounded-md p-2 text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-bg)]/10 hover:text-[var(--sidebar-text)]"
             type="button"
             @click="collapsed = !collapsed"
@@ -37,12 +45,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
           >
             <span class="text-xs"><component :is="collapseSidebarIcon" class="h-4 w-4" /></span>
           </button>
-        </div>
-        <SidebarNav :items="adminNav" :collapsed="collapsed" />
-      </aside>
-
-      <div class="flex min-w-0 flex-1 flex-col">
-        <Topbar>
+          </template>
           <template #leading>
             <button
               class="rounded-md p-2 text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-bg)]/10 hover:text-[var(--sidebar-text)] md:hidden"
@@ -50,7 +53,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
               @click="mobileOpen = true"
               aria-label="Open menu"
             >
-              <span class="text-xs">☰</span>
+              <span class="text-xs"><Menu class="h-4 w-4" /></span>
             </button>
           </template>
           <template #actions>
@@ -58,7 +61,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
           </template>
         </Topbar>
 
-        <main class="min-w-0 flex-1 p-4">
+        <main class="min-w-0 flex-1 p-4 bg-[var(--card)]">
           <RouterView />
         </main>
       </div>
