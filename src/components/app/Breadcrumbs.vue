@@ -2,7 +2,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Breadcrumb from '@/components/ui/Breadcrumb.vue'
-import { adminNav } from '@/lib/nav'
+import { nav } from '@/lib/nav'
+import type { NavItem } from '@/types/NavItem'
 
 type Crumb = { label: string; to?: string }
 
@@ -13,14 +14,14 @@ const props = defineProps<{
 const route = useRoute()
 
 function findLabel(path: string): string | undefined {
-  const stack = [...adminNav]
+  const stack: NavItem[] = [...nav]
   while (stack.length) {
     const item = stack.shift()
     if (!item) {
       continue
     }
 
-    if (item.to === path) {
+    if (typeof item.to === 'string' && item.to === path) {
       return item.label
     }
 

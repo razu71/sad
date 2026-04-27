@@ -5,7 +5,6 @@ import type { Component, ComputedRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import Topbar from '@/components/app/Topbar.vue'
 import SidebarNav from '@/components/app/SidebarNav.vue'
-import { adminNav } from '@/lib/nav'
 import { cn } from '@/lib/utils'
 import { useUiStore } from '@/stores/ui'
 import { CircleArrowLeft, CircleArrowRight, Menu } from 'lucide-vue-next'
@@ -24,13 +23,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
         class="hidden shrink-0 bg-[var(--sidebar-bg)] text-[var(--sidebar-text)] md:flex md:flex-col"
         :class="cn(collapsed ? 'w-16' : 'w-64')"
       >
-        <div class="flex h-14 items-center justify-between px-3">
-          <div class="min-w-0">
-            <span v-if="!collapsed" class="truncate font-semibold text-[var(--sidebar-text)]">Admin</span>
-            <span v-else class="truncate font-semibold text-[var(--sidebar-text)]">A</span>
-          </div>
-        </div>
-        <SidebarNav :items="adminNav" :collapsed="collapsed" />
+        <SidebarNav :collapsed="collapsed" @update:collapsed="collapsed = $event" />
       </aside>
 
       <div class="flex min-w-0 flex-1 flex-col">
@@ -81,7 +74,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
             <span class="text-xs">×</span>
           </button>
         </div>
-        <SidebarNav :items="adminNav" :collapsed="false" />
+        <SidebarNav :collapsed="false" @update:collapsed="collapsed = $event" />
       </div>
     </div>
   </div>
