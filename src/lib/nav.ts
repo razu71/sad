@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users } from 'lucide-vue-next'
+import { LayoutDashboard, LayoutTemplate, Settings, Users } from 'lucide-vue-next'
 import type { NavItem } from '@/types/NavItem'
 
 export const nav: NavItem[] = [
@@ -12,7 +12,16 @@ export const nav: NavItem[] = [
     to: '/admin/users',
     icon: Users,
   },
+  {
+    label: 'Settings',
+    to: '/admin/settings',
+    icon: Settings,
+  },
+  {
+    label: 'UI playground',
+    to: '/admin/ui',
+    icon: LayoutTemplate,
+  },
 ]
 
 export const adminNav = nav
-

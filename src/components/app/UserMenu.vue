@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { Settings, User, LogOut, Moon, Sun } from 'lucide-vue-next'
 import Avatar from '@/components/ui/Avatar.vue'
 import Button from '@/components/ui/Button.vue'
@@ -11,15 +10,13 @@ import { useUiStore } from '@/stores/ui'
 
 const auth = useAuthStore()
 const ui = useUiStore()
-const router = useRouter()
 const open = ref(false)
 
 const resolvedThemeIcon = computed(() => (ui.resolvedTheme === 'dark' ? Moon : Sun))
 
 async function logout() {
-  auth.clearSession()
   open.value = false
-  await router.push('/auth/login')
+  await auth.logout()
 }
 </script>
 

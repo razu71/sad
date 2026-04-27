@@ -1,9 +1,5 @@
-export type UserRole = "admin" | "manager" | "editor" | "viewer"
-
-export interface User {
+export type User = {
   id: string
   name: string
   email: string
-  avatarUrl?: string
-  role: UserRole
 }

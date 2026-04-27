@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
+import { useAuthStore } from '@/stores/auth'
+
+const APP_NAME = 'Sad'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,12 +27,30 @@ const router = createRouter({
           component: () => import('@/pages/auth/LoginPage.vue'),
           meta: { title: 'Sign in' },
         },
+        {
+          path: 'sign-up',
+          name: 'AuthSignUp',
+          component: () => import('@/pages/auth/SignUpPage.vue'),
+          meta: { title: 'Sign up' },
+        },
+        {
+          path: 'forgot-password',
+          name: 'AuthForgotPassword',
+          component: () => import('@/pages/auth/ForgotPasswordPage.vue'),
+          meta: { title: 'Forgot password' },
+        },
+        {
+          path: 'reset-password',
+          name: 'AuthResetPassword',
+          component: () => import('@/pages/auth/ResetPasswordPage.vue'),
+          meta: { title: 'Reset password' },
+        },
       ],
     },
     {
       path: '/admin',
       component: AdminLayout,
-      meta: { title: 'Admin' },
+      meta: { requiresAuth: true, title: 'Admin' },
       children: [
         {
           path: '',
@@ -45,12 +66,59 @@ const router = createRouter({
         {
           path: 'users',
           name: 'AdminUsers',
-          component: () => import('@/pages/admin/DashboardPage.vue'),
+          component: () => import('@/pages/admin/UsersPage.vue'),
           meta: { title: 'Users' },
+        },
+        {
+          path: 'settings',
+          name: 'AdminSettings',
+          component: () => import('@/pages/admin/SettingsPage.vue'),
+          meta: { title: 'Settings' },
+        },
+        {
+          path: 'ui',
+          name: 'AdminUiPlayground',
+          component: () => import('@/pages/admin/UiPlaygroundPage.vue'),
+          meta: { title: 'UI playground' },
+        },
+        {
+          path: ':pathMatch(.*)*',
+          name: 'AdminNotFound',
+          component: () => import('@/pages/errors/NotFoundPage.vue'),
+          meta: { title: 'Not found' },
         },
       ],
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/pages/errors/NotFoundPage.vue'),
+      meta: { title: 'Not found' },
+    },
   ],
+})
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth === true)
+
+  if (requiresAuth && !auth.isAuthenticated) {
+    return {
+      name: 'AuthLogin',
+      query: { redirect: to.fullPath },
+    }
+  }
+
+  if (to.path.startsWith('/auth') && auth.isAuthenticated) {
+    return { name: 'AdminDashboard' }
+  }
+
+  return true
+})
+
+router.afterEach((to) => {
+  const piece = typeof to.meta.title === 'string' ? String(to.meta.title) : ''
+  document.title = piece ? `${piece} · ${APP_NAME}` : APP_NAME
 })
 
 export default router
