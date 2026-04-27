@@ -37,7 +37,7 @@ function onDelete() {
   <div class="flex justify-end" @click.stop>
     <DropdownMenu :open="open" @update:open="open = $event">
       <template #trigger>
-        <Button size="icon" variant="ghost" :aria-label="`Actions for ${user.name}`" @click.stop>
+        <Button size="icon" variant="ghost" :aria-label="`Actions for ${user.name}`">
           <MoreHorizontal class="h-4 w-4" />
         </Button>
       </template>

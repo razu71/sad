@@ -5,6 +5,7 @@ import Avatar from '@/components/ui/Avatar.vue'
 import Button from '@/components/ui/Button.vue'
 import Popover from '@/components/ui/Popover.vue'
 import ThemeToggle from '@/components/app/ThemeToggle.vue'
+import { userAvatarImageUrl } from '@/lib/userAvatar'
 import { useAuthStore } from '@/stores/auth'
 import { useUiStore } from '@/stores/ui'
 
@@ -13,6 +14,10 @@ const ui = useUiStore()
 const open = ref(false)
 
 const resolvedThemeIcon = computed(() => (ui.resolvedTheme === 'dark' ? Moon : Sun))
+
+const menuUserId = computed(() => auth.user?.id ?? 'demo-1')
+const triggerAvatarSrc = computed(() => userAvatarImageUrl(menuUserId.value, 'sm'))
+const panelAvatarSrc = computed(() => userAvatarImageUrl(menuUserId.value, 'md'))
 
 async function logout() {
   open.value = false
@@ -24,13 +29,16 @@ async function logout() {
   <Popover :open="open" align="end" @update:open="open = $event">
     <template #trigger>
       <button type="button" class="inline-flex items-center rounded-full focus-visible:ring-2 focus-visible:ring-[var(--ring)]" aria-label="Open user menu">
-        <Avatar :alt="auth.user?.name ?? 'User'" :fallback="auth.user?.name ?? 'U'" size="sm" />
+        <Avatar :src="triggerAvatarSrc" :alt="auth.user?.name ?? 'User'" :fallback="auth.user?.name ?? 'U'" size="sm" />
       </button>
     </template>
     <div class="w-64 space-y-2">
-      <div class="rounded-[var(--radius-md)] bg-[var(--muted)] p-2">
-        <p class="text-sm font-medium text-[var(--foreground)]">{{ auth.user?.name ?? 'Guest User' }}</p>
-        <p class="text-xs text-[var(--muted-foreground)]">{{ auth.user?.email ?? 'guest@example.com' }}</p>
+      <div class="flex gap-3 rounded-[var(--radius-md)] bg-[var(--muted)] p-2">
+        <Avatar :src="panelAvatarSrc" :alt="auth.user?.name ?? 'User'" :fallback="auth.user?.name ?? 'U'" size="md" />
+        <div class="min-w-0 flex-1">
+          <p class="text-sm font-medium text-[var(--foreground)]">{{ auth.user?.name ?? 'Guest User' }}</p>
+          <p class="text-xs text-[var(--muted-foreground)]">{{ auth.user?.email ?? 'guest@example.com' }}</p>
+        </div>
       </div>
       <button type="button" class="flex w-full items-center gap-2 rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm hover:bg-[var(--accent)]">
         <User class="h-4 w-4" />

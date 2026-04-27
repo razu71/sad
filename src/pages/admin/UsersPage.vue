@@ -19,6 +19,7 @@ import PageHeader from '@/components/app/PageHeader.vue'
 import Switch from '@/components/ui/Switch.vue'
 import { fieldErrorDisplay } from '@/lib/form/fieldErrorDisplay'
 import { focusFirstErrorField } from '@/lib/form/focusFirstErrorField'
+import { userAvatarImageUrl } from '@/lib/userAvatar'
 import { formatDate } from '@/lib/utils'
 import { userFormSchema } from '@/schemas/userForm.schemas'
 import type { UserFormValues } from '@/schemas/userForm.schemas'
@@ -103,7 +104,7 @@ const columns = computed<ColumnDef<UserRow>[]>(() => [
     cell: (info) => {
       const u = info.row.original
       return h('div', { class: 'flex items-center gap-2' }, [
-        h(Avatar, { alt: u.name, fallback: u.name, size: 'sm' }),
+        h(Avatar, { alt: u.name, fallback: u.name, size: 'sm', src: userAvatarImageUrl(u.id, 'sm') }),
         h('span', { class: 'text-sm font-medium text-[var(--foreground)]' }, u.name),
       ])
     },
@@ -250,7 +251,7 @@ watch(dialogOpen, (open) => {
     <DataTable
       :columns="columns"
       :data="filtered"
-      :pagination="false"
+      :pagination="true"
       :sorting="true"
       :empty="{ title: 'No users', description: 'Try adjusting search or filters.' }"
     />

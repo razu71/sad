@@ -49,42 +49,50 @@ function saveNotificationPrefs() {
     <Tabs v-model="tab" class="mt-2">
       <template #tabs="{ modelValue, setValue }">
         <div class="flex flex-wrap gap-2 border-b border-[var(--border)] pb-2">
-          <button
+          <Button
             type="button"
             role="tab"
-            :class="['rounded-[var(--radius-sm)] px-3 py-1.5 text-sm', modelValue === 'profile' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]']"
+            variant="ghost"
+            size="sm"
+            :class="`rounded-[var(--radius-sm)] ${modelValue === 'profile' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`"
             :aria-selected="modelValue === 'profile'"
             @click="setValue('profile')"
           >
             Profile
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             role="tab"
-            :class="['rounded-[var(--radius-sm)] px-3 py-1.5 text-sm', modelValue === 'account' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]']"
+            variant="ghost"
+            size="sm"
+            :class="`rounded-[var(--radius-sm)] ${modelValue === 'account' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`"
             :aria-selected="modelValue === 'account'"
             @click="setValue('account')"
           >
             Account
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             role="tab"
-            :class="['rounded-[var(--radius-sm)] px-3 py-1.5 text-sm', modelValue === 'notifications' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]']"
+            variant="ghost"
+            size="sm"
+            :class="`rounded-[var(--radius-sm)] ${modelValue === 'notifications' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`"
             :aria-selected="modelValue === 'notifications'"
             @click="setValue('notifications')"
           >
             Notifications
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             role="tab"
-            :class="['rounded-[var(--radius-sm)] px-3 py-1.5 text-sm', modelValue === 'appearance' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]']"
+            variant="ghost"
+            size="sm"
+            :class="`rounded-[var(--radius-sm)] ${modelValue === 'appearance' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`"
             :aria-selected="modelValue === 'appearance'"
             @click="setValue('appearance')"
           >
             Appearance
-          </button>
+          </Button>
         </div>
       </template>
 
@@ -98,7 +106,7 @@ function saveNotificationPrefs() {
           <Label for="settings-email" required>Email</Label>
           <Input id="settings-email" v-model="profileEmail" class="max-w-md" type="email" />
         </div>
-        <div class="space-y-1.5">
+        <div class="space-y-1.5 max-w-md">
           <Label for="settings-bio">Bio</Label>
           <Textarea id="settings-bio" v-model="profileBio" class="min-h-[100px] max-w-md" />
         </div>
@@ -106,7 +114,7 @@ function saveNotificationPrefs() {
       </div>
 
       <div v-show="tab === 'account'" class="space-y-4 pt-4">
-        <div class="space-y-1.5">
+        <div class="space-y-1.5 max-w-md">
           <Label for="tz">Time zone</Label>
           <NativeSelect id="tz" v-model="timeZone" class="max-w-md">
             <option value="UTC">UTC</option>

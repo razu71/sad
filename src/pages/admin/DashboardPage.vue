@@ -1,12 +1,24 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { DollarSign, Percent, ShoppingCart, Users } from 'lucide-vue-next'
 import Card from '@/components/ui/Card.vue'
 import Chart from '@/components/ui/Chart.vue'
 import PageHeader from '@/components/app/PageHeader.vue'
 import StatCard from '@/components/app/StatCard.vue'
-import Table from '@/components/ui/Table.vue'
-import { formatDate } from '@/lib/utils'
+import DataTable from '@/components/ui/DataTable.vue'
+import type { ColumnDef } from '@tanstack/vue-table'
 
+type ActivityRow = {
+  at: string
+  user: string
+  action: string
+}
+
+const activitiesColumns: ColumnDef<ActivityRow>[] = [
+  { accessorKey: 'at', header: 'Time' },
+  { accessorKey: 'user', header: 'User' },
+  { accessorKey: 'action', header: 'Action' },
+];
 const activities = [
   { at: '2025-04-26T14:20:00.000Z', user: 'Avery Brooks', action: 'Updated team settings' },
   { at: '2025-04-26T12:05:00.000Z', user: 'Jordan Lee', action: 'Exported user list' },
@@ -57,24 +69,13 @@ const topUsers = [
       <h2 class="text-base font-semibold text-[var(--foreground)]">Recent activity</h2>
       <p class="mt-1 text-sm text-[var(--muted-foreground)]">Latest actions in your workspace (mock data).</p>
       <div class="mt-4">
-        <Table>
-          <table>
-            <thead>
-              <tr class="border-b border-[var(--border)] text-left text-xs font-medium text-[var(--muted-foreground)]">
-                <th class="p-2">Time</th>
-                <th class="p-2">User</th>
-                <th class="p-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(row, i) in activities" :key="i" class="border-b border-[var(--border)] last:border-0">
-                <td class="p-2 text-sm text-[var(--muted-foreground)]">{{ formatDate(row.at) }}</td>
-                <td class="p-2 text-sm text-[var(--foreground)]">{{ row.user }}</td>
-                <td class="p-2 text-sm text-[var(--muted-foreground)]">{{ row.action }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
+        <DataTable
+            :columns="activitiesColumns"
+            :data="activities"
+            :pagination="true"
+            :sorting="true"
+            :empty="{ title: 'No users', description: 'Try adjusting search or filters.' }"
+        />
       </div>
     </Card>
 
