@@ -17,10 +17,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex items-center gap-2 text-sm text-[var(--text-main)]/80">
+  <div class="flex items-center gap-2 text-sm text-[var(--topbar-text)]/80">
     <template v-for="(c, idx) in crumbs" :key="c.to">
-      <span v-if="idx !== 0" class="text-[var(--text-main)]/40">/</span>
-      <RouterLink class="hover:text-[var(--text-main)]" :to="c.to">{{ c.label }}</RouterLink>
+      <span v-if="idx !== 0" class="text-[var(--topbar-text)]/40">/</span>
+      <RouterLink class="hover:text-[var(--topbar-text)]" :to="c.to">{{ c.label }}</RouterLink>
     </template>
   </div>
 </template>

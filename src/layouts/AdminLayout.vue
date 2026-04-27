@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, type Ref } from 'vue'
+import { computed } from 'vue'
 import { RouterView } from 'vue-router'
 import type { Component, ComputedRef } from 'vue'
-import Topbar from '../components/app/Topbar.vue'
-import SidebarNav from '../components/app/SidebarNav.vue'
+import { storeToRefs } from 'pinia'
+import Topbar from '@/components/app/Topbar.vue'
+import SidebarNav from '@/components/app/SidebarNav.vue'
 import { adminNav } from '@/lib/nav'
 import { cn } from '@/lib/utils'
+import { useUiStore } from '@/stores/ui'
 import { CircleArrowLeft, CircleArrowRight } from 'lucide-vue-next'
 
-const collapsed: Ref<boolean> = ref(false)
-const mobileOpen: Ref<boolean> = ref(false)
+const uiStore = useUiStore()
+const { collapsed, mobileOpen } = storeToRefs(uiStore)
 const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
   return collapsed.value ? CircleArrowRight : CircleArrowLeft
 })
@@ -62,7 +64,7 @@ const collapseSidebarIcon: ComputedRef<Component> = computed(() => {
     </div>
 
     <div v-if="mobileOpen" class="fixed inset-0 z-50 md:hidden">
-      <button class="absolute inset-0 bg-black/40" type="button" @click="mobileOpen = false" aria-label="Close menu" />
+      <button class="absolute inset-0 bg-[var(--overlay)]" type="button" @click="mobileOpen = false" aria-label="Close menu" />
       <div class="absolute inset-y-0 left-0 w-72 bg-[var(--sidebar-bg)] text-[var(--sidebar-text)]">
         <div class="flex h-14 items-center justify-between px-3">
           <span class="font-semibold text-[var(--sidebar-text)]">Admin</span>

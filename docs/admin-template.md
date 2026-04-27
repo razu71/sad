@@ -91,7 +91,7 @@ Create (or keep) the following directories:
 - Component files: `PascalCase.vue` (e.g. `Button.vue`, `SidebarNav.vue`).
 - TS utilities and composables: `camelCase.ts` (e.g. `useField.ts`, `nav.ts`).
 - Stores: `src/stores/<name>.ts` using **Pinia setup stores**: `defineStore('name', () => { ... })`.
-- Types: `PascalCase` interfaces/types inside `src/types/*.ts`.
+- Types: `PascalCase` interfaces/types inside `src/types/*.ts`. All types should be in types folder with related named file. If type is used in multiple files, it should be in the common (common.types.ts) types file.
 - Folders: lowercase, kebab-friendly, but components stay PascalCase.
 
 ### Single sources of truth
@@ -702,6 +702,8 @@ Non-color tokens (mode-independent):
   - Items whose `permission` does not match the current user are hidden.
   - On mobile, this component is rendered inside a `Drawer` (see `AdminLayout`).
 - A11y: `<nav aria-label="Primary">`; submenus use `aria-expanded`.
+- Add padding on all sides of nav items. 
+- On collapse at the top should show the small logo only.
 
 ### `Topbar.vue`
 

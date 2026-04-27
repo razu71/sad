@@ -9,21 +9,85 @@
 }
 
 :root {
-  --background: #FFFFFF;
-  --card: #2E9E8F;
-  --bg-main: #fbfbfb;
-  --text-main: #1B3A4B;
+  --background: #FBFBFB;
   --foreground: #1B3A4B;
+  --card: #FFFFFF;
+  --card-foreground: #1B3A4B;
+  --muted: #F3F4F6;
+  --muted-foreground: #5C6B75;
+  --border: #E5E7EB;
+  --input: #FFFFFF;
+  --ring: rgba(232, 137, 74, 0.45);
+  --overlay: rgba(27, 58, 75, 0.45);
   --primary: #E8894A;
+  --primary-foreground: #FFFFFF;
   --secondary: #2E9E8F;
+  --secondary-foreground: #FFFFFF;
+  --accent: #FCEBD9;
+  --accent-foreground: #1B3A4B;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --success: #2E9E8F;
+  --success-foreground: #FFFFFF;
+  --warning: #D97706;
+  --warning-foreground: #FFFFFF;
+  --info: #2563EB;
+  --info-foreground: #FFFFFF;
   --sidebar-bg: #fbfbfb;
   --sidebar-text: #1B3A4B;
+  --sidebar-active-bg: #FCEBD9;
+  --sidebar-active-text: #E8894A;
   --topbar-bg: #fbfbfb;
   --topbar-text: #1B3A4B;
+  --topbar-border: #E5E7EB;
   --footer-bg: #fbfbfb;
-  --footer-text: #1B3A4B;
+  --footer-text: #5C6B75;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 10px 20px -4px rgba(15, 23, 42, 0.16);
+}
+
+[data-theme="dark"] {
+  --background: #0E1F29;
+  --foreground: #F2F5F7;
+  --card: #1B3A4B;
+  --card-foreground: #F2F5F7;
+  --muted: #13293A;
+  --muted-foreground: #8FA2AE;
+  --border: #264A5E;
+  --input: #13293A;
+  --ring: rgba(232, 137, 74, 0.55);
+  --overlay: rgba(0, 0, 0, 0.65);
+  --primary: #E8894A;
+  --primary-foreground: #1B3A4B;
+  --secondary: #2E9E8F;
+  --secondary-foreground: #0E1F29;
+  --accent: #264A5E;
+  --accent-foreground: #F2F5F7;
+  --destructive: #F87171;
+  --destructive-foreground: #0E1F29;
+  --success: #34D399;
+  --success-foreground: #0E1F29;
+  --warning: #FBBF24;
+  --warning-foreground: #0E1F29;
+  --info: #60A5FA;
+  --info-foreground: #0E1F29;
+  --sidebar-bg: #13293A;
+  --sidebar-text: #F2F5F7;
+  --sidebar-active-bg: #264A5E;
+  --sidebar-active-text: #E8894A;
+  --topbar-bg: #13293A;
+  --topbar-text: #F2F5F7;
+  --topbar-border: #264A5E;
+  --footer-bg: #13293A;
+  --footer-text: #8FA2AE;
 }
 
 html, body {
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }

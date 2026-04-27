@@ -29,9 +29,9 @@ const wrapperClass = computed(() => cn('flex flex-col gap-1 px-2 py-2', props.co
       :key="item.to"
       :to="item.to"
       :class="cn(
-        'flex items-center gap-3 rounded-md px-3 py-2 text-sm text-[var(--text-main)]/80 hover:bg-[var(--bg-main)]/10 hover:text-[var(--text-main)]',
+        'flex items-center gap-3 rounded-md px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:bg-[var(--sidebar-active-bg)] hover:text-[var(--sidebar-active-text)]',
         collapsed ? 'w-10 justify-center px-0' : '',
-        isActive(item.to) ? 'bg-[var(--bg-main)]/10 text-[var(--text-main)]' : ''
+        isActive(item.to) ? 'bg-[var(--sidebar-active-bg)] text-[var(--sidebar-active-text)]' : ''
       )"
     >
       <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />

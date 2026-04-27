@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button.vue'
 </script>
 
 <template>
-  <div class="rounded-lg bg-[var(--background)] p-6 shadow-sm">
+  <div class="rounded-lg bg-[var(--card)] p-6 text-[var(--card-foreground)] shadow-sm">
     <div class="flex items-center justify-between gap-4">
       <div class="min-w-0">
         <h1 class="truncate text-xl font-semibold">Dashboard</h1>

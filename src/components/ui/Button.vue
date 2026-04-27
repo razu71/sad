@@ -5,12 +5,12 @@ import { cn } from '@/lib/utils'
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline'
 type ButtonSize = 'sm' | 'md' | 'lg'
 
-const baseClass = 'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+const baseClass = 'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] disabled:pointer-events-none disabled:opacity-50'
 const variantClass: Record<ButtonVariant, string> = {
-  primary: 'bg-[var(--primary)] text-white hover:opacity-90',
-  secondary: 'bg-[var(--secondary)] text-white hover:opacity-90',
-  ghost: 'bg-transparent hover:bg-black/5',
-  outline: 'border border-black/10 bg-transparent hover:bg-black/5',
+  primary: 'bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90',
+  secondary: 'bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90',
+  ghost: 'bg-transparent text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]',
+  outline: 'border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]',
 }
 const sizeClass: Record<ButtonSize, string> = {
   sm: 'h-8 px-3',
