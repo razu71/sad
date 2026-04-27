@@ -42,24 +42,26 @@ function onDelete() {
         </Button>
       </template>
       <li>
-        <button
+        <Button
           type="button"
           role="menuitem"
-          class="flex w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm hover:bg-[var(--accent)]"
+          variant="ghost"
+          class="h-auto w-full min-h-0 justify-start gap-0 rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm font-normal hover:bg-[var(--accent)]"
           @click="onEdit"
         >
           Edit
-        </button>
+        </Button>
       </li>
       <li>
-        <button
+        <Button
           type="button"
           role="menuitem"
-          class="flex w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm text-[var(--destructive)] hover:bg-[var(--accent)]"
+          variant="ghost"
+          class="h-auto w-full min-h-0 justify-start gap-0 rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm font-normal text-[var(--destructive)] hover:bg-[var(--accent)]"
           @click="onDelete"
         >
           Delete
-        </button>
+        </Button>
       </li>
     </DropdownMenu>
   </div>
