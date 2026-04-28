@@ -15,9 +15,9 @@ const version = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
 </script>
 
 <template>
-  <div class="flex min-h-dvh bg-[var(--background)] text-[var(--foreground)]">
+  <div class="flex h-dvh max-h-dvh overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
     <aside
-      class="hidden shrink-0 border-r border-[var(--border)] bg-[var(--sidebar-bg)] text-[var(--sidebar-text)] transition-[width] duration-200 ease-out md:flex md:flex-col"
+      class="hidden shrink-0 border-r border-[var(--border)] bg-[var(--sidebar-bg)] text-[var(--sidebar-text)] transition-[width] duration-200 ease-out md:flex md:flex-col md:min-h-0 md:overflow-y-auto"
       :class="sidebarCollapsed ? 'w-16' : 'w-64'"
     >
       <SidebarNav
@@ -27,7 +27,7 @@ const version = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
       />
     </aside>
 
-    <div class="flex min-h-dvh min-w-0 flex-1 flex-col">
+    <div class="flex min-h-0 min-w-0 flex-1 flex-col">
       <Topbar class="shrink-0" />
       <main class="min-h-0 flex-1 overflow-y-auto bg-[var(--background)] p-4 md:p-6">
         <RouterView />
