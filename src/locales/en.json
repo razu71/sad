@@ -8,6 +8,7 @@
     "fintech": "Fintech",
     "healthcare": "Healthcare",
     "fleet": "Fleet",
+    "inbox": "Inbox",
     "users": "Users",
     "revenue": "Revenue",
     "orders": "Orders",
@@ -27,6 +28,7 @@
     "fintech": "Fintech",
     "healthcare": "Healthcare",
     "fleetTracking": "Fleet tracking",
+    "inbox": "Inbox",
     "users": "Users",
     "settings": "Settings",
     "uiPlayground": "UI playground",
@@ -78,7 +80,8 @@
       "profile": "Profile",
       "account": "Account",
       "notifications": "Notifications",
-      "appearance": "Appearance"
+      "appearance": "Appearance",
+      "languages": "Languages"
     },
     "profile": {
       "avatarHint": "Avatar upload is a mock; paste a URL in a later iteration.",
@@ -113,6 +116,18 @@
       "futureDensity": "Density",
       "futureSidebar": "Sidebar default state",
       "futureMotion": "Reduce motion"
+    },
+    "languages": {
+      "title": "Languages",
+      "description": "View and edit English and Bangla strings. Changes apply immediately after save.",
+      "key": "Key",
+      "english": "English",
+      "bangla": "Bangla",
+      "addKey": "Add key",
+      "newKeyPlaceholder": "e.g. my.feature.title",
+      "removeRow": "Remove",
+      "applySave": "Save translations",
+      "toastSaved": "Translations saved."
     }
   },
   "toast": {
@@ -123,5 +138,42 @@
   "language": {
     "en": "English",
     "bn": "Bangla"
+  },
+  "inbox": {
+    "pageTitle": "Inbox",
+    "pageDescription": "Unified conversations across Instagram, Telegram, WhatsApp, and Messenger.",
+    "searchChats": "Search chats",
+    "allChannels": "All channels",
+    "channelInstagram": "Instagram",
+    "channelTelegram": "Telegram",
+    "channelWhatsapp": "WhatsApp",
+    "channelMessenger": "Messenger",
+    "filtersHint": "Filter by channel; search matches name, message, or phone.",
+    "inboxTitle": "Assigned conversations",
+    "noThreads": "No conversations match your filters.",
+    "pause": "Pause",
+    "close": "Close",
+    "profile": "Contact profile",
+    "composePlaceholder": "Type a reply…",
+    "attach": "Attach file",
+    "emoji": "Emoji",
+    "image": "Image",
+    "template": "Templates",
+    "send": "Send",
+    "selectThread": "Select a conversation",
+    "contactDetails": "Contact",
+    "fieldChannel": "Channel",
+    "fieldId": "ID",
+    "fieldPhone": "Phone",
+    "fieldEmail": "Email",
+    "fieldAddress": "Address",
+    "addAttribute": "Add attribute",
+    "notes": "Team notes",
+    "notePlaceholder": "Write an internal note…",
+    "noteSample1Time": "Yesterday",
+    "noteSample1": "VIP — prioritize refunds.",
+    "noteSample2Time": "Apr 26",
+    "noteSample2": "Confirmed billing address with carrier.",
+    "edit": "Edit"
   }
 }

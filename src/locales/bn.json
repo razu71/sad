@@ -8,6 +8,7 @@
     "fintech": "ফিনটেক",
     "healthcare": "স্বাস্থ্যসেবা",
     "fleet": "ফ্লিট",
+    "inbox": "ইনবক্স",
     "users": "ব্যবহারকারী",
     "revenue": "রিভেন্যু",
     "orders": "অর্ডার",
@@ -27,6 +28,7 @@
     "fintech": "ফিনটেক",
     "healthcare": "স্বাস্থ্যসেবা",
     "fleetTracking": "ফ্লিট ট্র্যাকিং",
+    "inbox": "ইনবক্স",
     "users": "ব্যবহারকারী",
     "settings": "সেটিংস",
     "uiPlayground": "ইউআই প্লেগ্রাউন্ড",
@@ -78,7 +80,8 @@
       "profile": "প্রোফাইল",
       "account": "অ্যাকাউন্ট",
       "notifications": "বিজ্ঞপ্তি",
-      "appearance": "চেহারা"
+      "appearance": "চেহারা",
+      "languages": "ভাষা"
     },
     "profile": {
       "avatarHint": "অবতার আপলোড নকল; পরের সংস্করণে URL পেস্ট করুন।",
@@ -113,6 +116,18 @@
       "futureDensity": "ঘনত্ব",
       "futureSidebar": "সাইডবার ডিফল্ট অবস্থা",
       "futureMotion": "অনিমেশন কমান"
+    },
+    "languages": {
+      "title": "ভাষা",
+      "description": "ইংরেজি ও বাংলা টেক্সট দেখুন ও সম্পাদনা করুন। সংরক্ষণের পর অবিলম্বে প্রয়োগ হয়।",
+      "key": "কী",
+      "english": "ইংরেজি",
+      "bangla": "বাংলা",
+      "addKey": "কী যোগ করুন",
+      "newKeyPlaceholder": "যেমন my.feature.title",
+      "removeRow": "সরান",
+      "applySave": "অনুবাদ সংরক্ষণ",
+      "toastSaved": "অনুবাদ সংরক্ষিত।"
     }
   },
   "toast": {
@@ -123,5 +138,42 @@
   "language": {
     "en": "ইংরেজি",
     "bn": "বাংলা"
+  },
+  "inbox": {
+    "pageTitle": "ইনবক্স",
+    "pageDescription": "ইনস্টাগ্রাম, টেলিগ্রাম, হোয়াটসঅ্যাপ ও মেসেঞ্জারের সম্মিলিত কথোপকথন।",
+    "searchChats": "চ্যাট খুঁজুন",
+    "allChannels": "সব চ্যানেল",
+    "channelInstagram": "ইনস্টাগ্রাম",
+    "channelTelegram": "টেলিগ্রাম",
+    "channelWhatsapp": "হোয়াটসঅ্যাপ",
+    "channelMessenger": "মেসেঞ্জার",
+    "filtersHint": "চ্যানেল দিয়ে ফিল্টার; নাম, মেসেজ বা ফোনে খোঁজ।",
+    "inboxTitle": "নির্ধারিত কথোপকথন",
+    "noThreads": "কোনো কথোপকথনই ফিল্টারের সাথে মেলেনি।",
+    "pause": "বিরতি",
+    "close": "বন্ধ",
+    "profile": "যোগাযোগ প্রোফাইল",
+    "composePlaceholder": "উত্তর লিখুন…",
+    "attach": "ফাইল সংযুক্ত করুন",
+    "emoji": "ইমোজি",
+    "image": "ছবি",
+    "template": "টেমপ্লেট",
+    "send": "পাঠান",
+    "selectThread": "একটি কথোপকথন বেছে নিন",
+    "contactDetails": "যোগাযোগ",
+    "fieldChannel": "চ্যানেল",
+    "fieldId": "আইডি",
+    "fieldPhone": "ফোন",
+    "fieldEmail": "ইমেইল",
+    "fieldAddress": "ঠিকানা",
+    "addAttribute": "বৈশিষ্ট্য যোগ করুন",
+    "notes": "দলীয় নোট",
+    "notePlaceholder": "অভ্যন্তরীণ নোট লিখুন…",
+    "noteSample1Time": "গতকাল",
+    "noteSample1": "ভিআইপি — রিফান্ড অগ্রাধিকার।",
+    "noteSample2Time": "২৬ এপ্রিল",
+    "noteSample2": "বাহকের সাথে বিলিং ঠিকানা নিশ্চিত।",
+    "edit": "সম্পাদনা"
   }
 }

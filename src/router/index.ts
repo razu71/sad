@@ -86,6 +86,12 @@ const router = createRouter({
           meta: { title: 'meta.fleetTracking' },
         },
         {
+          path: 'inbox',
+          name: 'AdminInbox',
+          component: () => import('@/pages/admin/InboxPage.vue'),
+          meta: { title: 'meta.inbox' },
+        },
+        {
           path: 'users',
           name: 'AdminUsers',
           component: () => import('@/pages/admin/UsersPage.vue'),

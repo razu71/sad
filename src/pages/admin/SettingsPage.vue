@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useToast } from '@/components/ui/Toast'
 import Button from '@/components/ui/Button.vue'
@@ -12,8 +12,10 @@ import Switch from '@/components/ui/Switch.vue'
 import Tabs from '@/components/ui/Tabs.vue'
 import Textarea from '@/components/ui/Textarea.vue'
 import ThemeToggle from '@/components/app/ThemeToggle.vue'
+import { messagesBn, messagesEn } from '@/lib/i18n'
+import { getByDotPath } from '@/lib/i18n-message-helpers'
 import { useAuthStore } from '@/stores/auth'
-import { useUiStore } from '@/stores/ui'
+import { useUiStore, type CustomI18nFlat } from '@/stores/ui'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -30,6 +32,72 @@ const profileBio = ref('Product designer building admin tools.')
 const notifyProduct = ref(true)
 const notifyWeekly = ref(false)
 const notifySecurity = ref(true)
+
+type TranslationRow = { key: string; en: string; bn: string }
+
+const translationRows = ref<TranslationRow[]>([])
+const newTranslationKey = ref('')
+
+function resolveEffective(localeCode: 'en' | 'bn', key: string): string {
+  const custom = ui.customI18nFlat[localeCode]
+  if (Object.prototype.hasOwnProperty.call(custom, key)) {
+    return custom[key]!
+  }
+  const base = localeCode === 'en' ? messagesEn : messagesBn
+  return getByDotPath(base, key)
+}
+
+function refreshTranslationRows() {
+  const keys = ui.getAllTranslationKeys()
+  translationRows.value = keys.map((key) => ({
+    key,
+    en: resolveEffective('en', key),
+    bn: resolveEffective('bn', key),
+  }))
+}
+
+watch(tab, (value) => {
+  if (value === 'languages') {
+    refreshTranslationRows()
+  }
+})
+
+function addTranslationRow() {
+  const key = newTranslationKey.value.trim()
+  if (!key || translationRows.value.some((row) => row.key === key)) {
+    return
+  }
+  translationRows.value.push({
+    key,
+    en: resolveEffective('en', key),
+    bn: resolveEffective('bn', key),
+  })
+  newTranslationKey.value = ''
+}
+
+function removeTranslationRow(index: number) {
+  translationRows.value.splice(index, 1)
+}
+
+function saveTranslations() {
+  const next: CustomI18nFlat = { en: {}, bn: {} }
+  for (const row of translationRows.value) {
+    const key = row.key.trim()
+    if (!key) {
+      continue
+    }
+    const baseEn = getByDotPath(messagesEn, key)
+    const baseBn = getByDotPath(messagesBn, key)
+    if (row.en !== baseEn) {
+      next.en[key] = row.en
+    }
+    if (row.bn !== baseBn) {
+      next.bn[key] = row.bn
+    }
+  }
+  ui.persistCustomI18nFlat(next)
+  toast.success(t('settings.languages.toastSaved'))
+}
 
 function saveProfile() {
   toast.success(t('toast.profileSaved'))
@@ -94,6 +162,17 @@ function saveNotificationPrefs() {
             @click="setValue('appearance')"
           >
             {{ t('settings.tabs.appearance') }}
+          </Button>
+          <Button
+            type="button"
+            role="tab"
+            variant="ghost"
+            size="sm"
+            :class="`rounded-[var(--radius-sm)] ${modelValue === 'languages' ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'}`"
+            :aria-selected="modelValue === 'languages'"
+            @click="setValue('languages')"
+          >
+            {{ t('settings.tabs.languages') }}
           </Button>
         </div>
       </template>
@@ -181,6 +260,49 @@ function saveNotificationPrefs() {
             <li>{{ t('settings.appearance.futureSidebar') }}</li>
             <li>{{ t('settings.appearance.futureMotion') }}</li>
           </ul>
+        </div>
+      </div>
+
+      <div v-show="tab === 'languages'" class="space-y-4 pt-4">
+        <div>
+          <h3 class="text-sm font-medium text-[var(--foreground)]">{{ t('settings.languages.title') }}</h3>
+          <p class="mt-1 text-xs text-[var(--muted-foreground)]">{{ t('settings.languages.description') }}</p>
+        </div>
+
+        <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end">
+          <div class="min-w-0 flex-1 space-y-1.5 sm:max-w-md">
+            <Label for="new-i18n-key">{{ t('settings.languages.key') }}</Label>
+            <Input id="new-i18n-key" v-model="newTranslationKey" type="text" :placeholder="t('settings.languages.newKeyPlaceholder')" />
+          </div>
+          <Button type="button" variant="secondary" @click="addTranslationRow">{{ t('settings.languages.addKey') }}</Button>
+          <Button type="button" @click="saveTranslations">{{ t('settings.languages.applySave') }}</Button>
+        </div>
+
+        <div class="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--border)]">
+          <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+            <thead class="border-b border-[var(--border)] bg-[var(--muted)]">
+              <tr>
+                <th class="px-3 py-2 font-medium text-[var(--foreground)]">{{ t('settings.languages.key') }}</th>
+                <th class="px-3 py-2 font-medium text-[var(--foreground)]">{{ t('settings.languages.english') }}</th>
+                <th class="px-3 py-2 font-medium text-[var(--foreground)]">{{ t('settings.languages.bangla') }}</th>
+                <th class="px-3 py-2 font-medium text-[var(--foreground)]"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in translationRows" :key="row.key" class="border-b border-[var(--border)] last:border-b-0">
+                <td class="px-3 py-2 align-top font-mono text-xs text-[var(--muted-foreground)]">{{ row.key }}</td>
+                <td class="px-3 py-2 align-top">
+                  <Input v-model="row.en" type="text" class="min-w-[140px]" />
+                </td>
+                <td class="px-3 py-2 align-top">
+                  <Input v-model="row.bn" type="text" class="min-w-[140px]" />
+                </td>
+                <td class="px-3 py-2 align-top">
+                  <Button type="button" variant="ghost" size="sm" @click="removeTranslationRow(index)">{{ t('settings.languages.removeRow') }}</Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </Tabs>

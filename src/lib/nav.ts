@@ -1,4 +1,4 @@
-import { HeartPulse, Landmark, LayoutDashboard, LayoutPanelLeft, LayoutTemplate, Settings, Tractor, Users } from 'lucide-vue-next'
+import { HeartPulse, Inbox, Landmark, LayoutDashboard, LayoutPanelLeft, LayoutTemplate, Settings, Tractor, Users } from 'lucide-vue-next'
 import type { NavItem } from '@/types/NavItem'
 
 export const nav: NavItem[] = [
@@ -26,6 +26,11 @@ export const nav: NavItem[] = [
     label: 'nav.fleet',
     to: '/admin/fleet-tracking',
     icon: Tractor,
+  },
+  {
+    label: 'nav.inbox',
+    to: '/admin/inbox',
+    icon: Inbox,
   },
   {
     label: 'nav.users',
