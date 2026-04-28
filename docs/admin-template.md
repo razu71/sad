@@ -4,20 +4,27 @@ This document is the implementation roadmap for turning this project into a **fu
 
 ---
 
-## Tech stack
+## Tech stack (packages installed already)
 
-- Vue 3 (`<script setup lang="ts">`)
-- Vite + TypeScript
-- TailwindCSS (already installed)
-- Pinia (already installed)
-- Vue Router (already installed)
-- `lucide-vue-next` icons (already installed)
-- `clsx` + `tailwind-merge` (already installed) — for the `cn()` helper
-- `@tanstack/vue-table` — for `DataTable` (already installed)
-- `vue-toastification` — for toasts (already installed)
+- `Vue 3` (`<script setup lang="ts">`)
+- `Vite + TypeScript`
+- `TailwindCSS`
+- `Pinia`
+- `Vue Router`
+- `lucide-vue-next` icons
+- `clsx` + `tailwind-merge` — for the `cn()` helper
+- `@tanstack/vue-table` — for `DataTable`
+- `vue-toastification` — for toasts
+- `vue3-apexcharts` — for charts
+- `vee-validate` — for form validation
+- `zod` — for schema validation
+- `@vee-validate/zod` — for zod schema validation
+- `@tanstack/vue-table` — for `DataTable`
+- `vue-multiselect` - for multiselect dropdown
 
 ## Non-negotiables
 
+- **Comments**: use comments almost everywhere to explain the code. So that, I can understand properly.
 - **Composition API `<script setup>` only** for all new `.vue` code.
 - **TypeScript everywhere** (stores, composables, UI configs, pages, props).
 - **Reusable components first** (primitives → composed → layout → pages).
@@ -26,6 +33,24 @@ This document is the implementation roadmap for turning this project into a **fu
 - **Icons**: never inline SVGs or static icon files. Always use `lucide-vue-next`.
 - **Imports**: always use the `@/` alias (configured in `vite.config.ts` and `tsconfig.app.json`).
 - **No global event bus**. Cross-component communication uses props/emits, Pinia, or `provide/inject`.
+
+## Folder structure
+
+- `src/components/ui/` — hand-built reusable UI primitives (`Button`, `Input`, `Dialog`, etc.)
+- `src/components/app/` — template-specific composed components (`SidebarNav`, `Topbar`, `Breadcrumbs`, `AppLogo`, `PageHeader`, `StatCard`, etc.)
+- `src/components/forms/` — forms related components like `FormGroup.vue`, `FormSelect.vue`, `FormDatePicker.vue`, `FormFileUpload.vue` and other forms related components should be in this folder.
+- `src/components/charts/` — charts related components like `Chart.vue`, `ChartArea.vue`, `ChartBar.vue`, `ChartLine.vue`, `ChartPie.vue`, `ChartRadar.vue`, `ChartScatter.vue` and other charts related components should be in this folder.
+- `src/layouts/` — layouts like `AdminLayout.vue` for authenticated routes and `AuthLayout.vue` for public routes
+- `src/pages/` — route pages, grouped by area (`auth/`, `admin/`, `errors/`)
+- `src/composables/` — shared Vue composables like `useField.ts` for form fields and `useForm.ts` for form validation
+- `src/stores/` — Pinia setup stores like `auth.ts` for authentication and `ui.ts` for UI state and stores for other features should be in this folder.
+- `src/types/` — shared TS types and DTOs like `User.ts` for the user and `NavItem.ts` for the navigation and types for other features should be in this folder.
+- `src/router/` — router setup like `index.ts` for the router and route guards and route guards for other features should be in this folder.
+- `src/schemas/` — schema validation like `auth.schemas.ts` for authentication and `user.schemas.ts` for the user and schemas for other features should be in this folder.
+- `src/utils/` — utility functions like `formatDate.ts` for formatting dates and `formatNumber.ts` for formatting numbers and utility functions for other features should be in this folder. In this folder, we will also keep the `cn()` helper function. Create a libs folder here and put library related customized function only. rest you can put directly under utils folder.
+- `src/assets/` — assets like logo, images, icons, fonts, styles etc should be in this folder.
+- `src/style.css` — global styles for the application
+- `src/main.ts` — the main entry point for the application like `main.ts` for the application and other entry points should be in this folder.
 
 ## Brand palette (must be applied)
 

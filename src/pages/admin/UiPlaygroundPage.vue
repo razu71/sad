@@ -23,7 +23,7 @@ import Empty from '@/components/ui/Empty.vue'
 import Input from '@/components/ui/Input.vue'
 import InputGroup from '@/components/ui/InputGroup.vue'
 import Kbd from '@/components/ui/Kbd.vue'
-import Label from '@/components/ui/Label.vue'
+import MultiSelect from '@/components/ui/MultiSelect.vue'
 import NativeSelect from '@/components/ui/NativeSelect.vue'
 import Pagination from '@/components/ui/Pagination.vue'
 import Popover from '@/components/ui/Popover.vue'
@@ -50,6 +50,14 @@ const sw = ref(true)
 const sliderVal = ref(40)
 const page = ref(1)
 const selectVal = ref('a')
+const multiVal = ref<string[]>(['vite', 'tailwind'])
+const multiOpts = [
+  { label: 'Vue', value: 'vue' },
+  { label: 'TypeScript', value: 'typescript' },
+  { label: 'Vite', value: 'vite' },
+  { label: 'Tailwind', value: 'tailwind' },
+  { label: 'Vitest', value: 'vitest' },
+]
 const radioVal = ref('one')
 const cb = ref(false)
 const pgIn = ref('')
@@ -126,6 +134,17 @@ const accordionItems = [
               <template #prefix>https://</template>
               <Input v-model="pgIn" />
             </InputGroup>
+            <div>
+              <Label for="pg-multi">Multi-select</Label>
+              <MultiSelect
+                id="pg-multi"
+                v-model="multiVal"
+                class="mt-1 max-w-xl"
+                placeholder="Choose tags…"
+                :options="multiOpts"
+              />
+              <Typography as="p" variant="muted" class="mt-1 text-xs">Value: {{ multiVal.join(', ') || '∅' }}</Typography>
+            </div>
             <div class="flex flex-wrap items-center gap-3">
               <Checkbox v-model="cb" label="Checkbox" />
               <Switch v-model="sw" />

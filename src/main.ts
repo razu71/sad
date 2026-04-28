@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import VueApexCharts from 'vue3-apexcharts'
 import { createPinia } from 'pinia'
 import { configure } from 'vee-validate'
 import Toast from 'vue-toastification'
@@ -33,6 +34,7 @@ uiStore.hydrateTheme()
 const authStore = useAuthStore()
 authStore.hydrate()
 
+app.use(VueApexCharts)
 app.use(router)
 
 app.mount('#app')

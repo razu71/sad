@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { DollarSign, Percent, ShoppingCart, Users } from 'lucide-vue-next'
 import Card from '@/components/ui/Card.vue'
-import Chart from '@/components/ui/Chart.vue'
 import PageHeader from '@/components/app/PageHeader.vue'
 import StatCard from '@/components/app/StatCard.vue'
 import DataTable from '@/components/ui/DataTable.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
+import { getDashboardRevenueChartOptions, getDashboardRevenueSeries } from '@/lib/apex/dashboardRevenueChart'
+
+const revenueChartOptions = getDashboardRevenueChartOptions()
+const revenueChartSeries = getDashboardRevenueSeries()
 
 type ActivityRow = {
   at: string
@@ -80,10 +82,13 @@ const topUsers = [
     </Card>
 
     <div class="mt-6 grid gap-6 lg:grid-cols-2">
-      <div>
-        <h2 class="mb-2 text-sm font-medium text-[var(--foreground)]">Revenue (placeholder)</h2>
-        <Chart type="line" :data="[]" />
-      </div>
+      <Card>
+        <h2 class="text-base font-semibold text-[var(--foreground)]">Revenue</h2>
+        <p class="mt-1 text-sm text-[var(--muted-foreground)]">Last 7 days (mock).</p>
+        <div class="mt-4 min-h-[240px] w-full min-w-0">
+          <apexchart type="area" height="260" :options="revenueChartOptions" :series="revenueChartSeries" />
+        </div>
+      </Card>
       <Card>
         <h2 class="text-base font-semibold text-[var(--foreground)]">Top users</h2>
         <p class="mt-1 text-sm text-[var(--muted-foreground)]">By event volume (mock).</p>

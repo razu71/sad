@@ -64,6 +64,30 @@ const router = createRouter({
           meta: { title: 'Dashboard' },
         },
         {
+          path: 'saas-dashboard',
+          name: 'AdminSaaSDashboard',
+          component: () => import('@/pages/admin/SaaSDashboardPage.vue'),
+          meta: { title: 'SaaS dashboard' },
+        },
+        {
+          path: 'fintech-dashboard',
+          name: 'AdminFintechDashboard',
+          component: () => import('@/pages/admin/FintechDashboardPage.vue'),
+          meta: { title: 'Fintech' },
+        },
+        {
+          path: 'healthcare-dashboard',
+          name: 'AdminHealthcareDashboard',
+          component: () => import('@/pages/admin/HealthcareDashboardPage.vue'),
+          meta: { title: 'Healthcare' },
+        },
+        {
+          path: 'fleet-tracking',
+          name: 'AdminFleetTracking',
+          component: () => import('@/pages/admin/FleetTrackingDashboardPage.vue'),
+          meta: { title: 'Fleet tracking' },
+        },
+        {
           path: 'users',
           name: 'AdminUsers',
           component: () => import('@/pages/admin/UsersPage.vue'),
