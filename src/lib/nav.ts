@@ -3,42 +3,42 @@ import type { NavItem } from '@/types/NavItem'
 
 export const nav: NavItem[] = [
   {
-    label: 'Dashboard',
+    label: 'nav.dashboard',
     to: '/admin/dashboard',
     icon: LayoutDashboard,
   },
   {
-    label: 'SaaS dashboard',
+    label: 'nav.saasDashboard',
     to: '/admin/saas-dashboard',
     icon: LayoutPanelLeft,
   },
   {
-    label: 'Fintech',
+    label: 'nav.fintech',
     to: '/admin/fintech-dashboard',
     icon: Landmark,
   },
   {
-    label: 'Healthcare',
+    label: 'nav.healthcare',
     to: '/admin/healthcare-dashboard',
     icon: HeartPulse,
   },
   {
-    label: 'Fleet',
+    label: 'nav.fleet',
     to: '/admin/fleet-tracking',
     icon: Tractor,
   },
   {
-    label: 'Users',
+    label: 'nav.users',
     to: '/admin/users',
     icon: Users,
   },
   {
-    label: 'Settings',
+    label: 'nav.settings',
     to: '/admin/settings',
     icon: Settings,
   },
   {
-    label: 'UI playground',
+    label: 'nav.uiPlayground',
     to: '/admin/ui',
     icon: LayoutTemplate,
   },

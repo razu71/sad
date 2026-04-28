@@ -7,6 +7,7 @@ import 'vue-toastification/dist/index.css'
 import '@/style.css';
 import App from '@/App.vue'
 import router from '@/router'
+import i18n from '@/lib/i18n'
 import { useAuthStore } from '@/stores/auth'
 import { useUiStore } from '@/stores/ui'
 
@@ -21,6 +22,7 @@ const app = createApp(App)
 const pinia = createPinia()
 
 app.use(pinia)
+app.use(i18n)
 
 app.use(Toast, {
   position: 'bottom-right',
@@ -29,6 +31,7 @@ app.use(Toast, {
 })
 
 const uiStore = useUiStore()
+uiStore.hydrateLocale()
 uiStore.hydrateTheme()
 
 const authStore = useAuthStore()

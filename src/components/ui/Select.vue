@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import DropdownMenu from '@/components/ui/DropdownMenu.vue'
 
 type Option = { label: string; value: string }
@@ -24,6 +24,8 @@ const emit = defineEmits<{
   'update:modelValue': [value: string | string[]]
 }>()
 
+const menuOpen = ref(false)
+
 const label = computed(() => {
   if (props.multiple && Array.isArray(props.modelValue)) {
     const selected = props.options.filter((option) => props.modelValue.includes(option.value))
@@ -41,11 +43,12 @@ function select(value: string) {
   }
 
   emit('update:modelValue', value)
+  menuOpen.value = false
 }
 </script>
 
 <template>
-  <DropdownMenu :open="false">
+  <DropdownMenu :open="menuOpen" @update:open="menuOpen = $event">
     <template #trigger>
       <button :disabled="disabled" type="button" :aria-invalid="invalid || undefined" class="h-10 w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--input)] px-3 text-left text-sm text-[var(--foreground)]">
         {{ label }}

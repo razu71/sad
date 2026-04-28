@@ -1,0 +1,140 @@
+{
+  "app": {
+    "name": "Sad"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "saasDashboard": "সাস ড্যাশবোর্ড",
+    "fintech": "ফিনটেক",
+    "healthcare": "স্বাস্থ্যসেবা",
+    "fleet": "ফ্লিট",
+    "users": "ব্যবহারকারী",
+    "revenue": "রিভেন্যু",
+    "orders": "অর্ডার",
+    "conversion": "কনভারশন",
+    "settings": "সেটিংস",
+    "uiPlayground": "ইউআই প্লেগ্রাউন্ড"
+  },
+  "meta": {
+    "auth": "প্রমাণীকরণ",
+    "signIn": "সাইন ইন",
+    "signUp": "সাইন আপ",
+    "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন",
+    "resetPassword": "পাসওয়ার্ড রিসেট",
+    "admin": "অ্যাডমিন",
+    "dashboard": "ড্যাশবোর্ড",
+    "saasDashboard": "সাস ড্যাশবোর্ড",
+    "fintech": "ফিনটেক",
+    "healthcare": "স্বাস্থ্যসেবা",
+    "fleetTracking": "ফ্লিট ট্র্যাকিং",
+    "users": "ব্যবহারকারী",
+    "settings": "সেটিংস",
+    "uiPlayground": "ইউআই প্লেগ্রাউন্ড",
+    "notFound": "পাওয়া যায়নি"
+  },
+  "topbar": {
+    "openMenu": "মেনু খুলুন",
+    "openNotifications": "বিজ্ঞপ্তি খুলুন",
+    "openUserMenu": "ব্যবহারকারী মেনু খুলুন",
+    "language": "ভাষা"
+  },
+  "userMenu": {
+    "profile": "প্রোফাইল",
+    "settings": "সেটিংস",
+    "theme": "থিম",
+    "logout": "লগআউট",
+    "guestName": "অতিথি ব্যবহারকারী",
+    "guestEmail": "guest@example.com"
+  },
+  "notifications": {
+    "title": "বিজ্ঞপ্তি",
+    "markAllRead": "সব পঠিত হিসেবে চিহ্নিত করুন",
+    "loading": "লোড হচ্ছে...",
+    "emptyTitle": "কোনো বিজ্ঞপ্তি নেই",
+    "emptyDescription": "আপনি আপ টু ডেট।",
+    "welcomeTitle": "অ্যাডমিন টেমপ্লেটে স্বাগতম",
+    "themeTitle": "থিম সফলভাবে পরিবর্তিত হয়েছে",
+    "justNow": "এইমাত্র",
+    "fiveMinAgo": "৫ মি আগে"
+  },
+  "dashboard": {
+    "title": "ড্যাশবোর্ড",
+    "description": "ব্যবহারের সংক্ষেপ ও স্বাস্থ্য।",
+    "users": "ব্যবহারকারী",
+    "revenue": "রিভেন্যু",
+    "orders": "অর্ডার",
+    "conversion": "কনভারশন"
+  },
+  "layout": {
+    "footerRights": "সর্বস্বত্ব সংরক্ষিত।",
+    "expandSidebar": "সাইডবার প্রসারিত করুন",
+    "collapseSidebar": "সাইডবার সঙ্কুচিত করুন",
+    "primaryNav": "প্রাথমিক"
+  },
+  "settings": {
+    "title": "সেটিংস",
+    "description": "প্রোফাইল, অ্যাকাউন্ট এবং চেহারা।",
+    "tabs": {
+      "profile": "প্রোফাইল",
+      "account": "অ্যাকাউন্ট",
+      "notifications": "বিজ্ঞপ্তি",
+      "appearance": "চেহারা",
+      "languages": "ভাষা"
+    },
+    "profile": {
+      "avatarHint": "অবতার আপলোড নকল; পরের সংস্করণে URL পেস্ট করুন।",
+      "name": "নাম",
+      "email": "ইমেইল",
+      "bio": "পরিচিতি",
+      "saveProfile": "প্রোফাইল সংরক্ষণ"
+    },
+    "account": {
+      "timeZone": "সময় অঞ্চল",
+      "saveAccount": "অ্যাকাউন্ট সংরক্ষণ"
+    },
+    "notifications": {
+      "productTitle": "পণ্য আপডেট",
+      "productDescription": "মাঝে মাঝে খবর ও টিপস।",
+      "weeklyTitle": "সাপ্তাহিক সারাংশ",
+      "weeklyDescription": "প্রতি সোমবার কার্যকলাপের সার।",
+      "securityTitle": "নিরাপত্তা সতর্কতা",
+      "securityDescription": "লগইন ও পাসওয়ার্ড পরিবর্তন।",
+      "save": "বিজ্ঞপ্তি পছন্দ সংরক্ষণ"
+    },
+    "appearance": {
+      "themeTitle": "থিম",
+      "themeDescription": "অ্যাপ জুড়ে অবিলম্বে প্রয়োগ হয়।",
+      "previewTitle": "প্রিভিউ",
+      "previewCard": "বর্তমান মোডে কার্ড পৃষ্ঠ।",
+      "previewMuted": "নিঃশব্দ সহায়ক টেক্সট ও ইনপুট।",
+      "primary": "প্রাথমিক",
+      "secondary": "গৌণ",
+      "resolved": "নিষ্পত্তি",
+      "futureTitle": "ভবিষ্যৎ",
+      "futureDensity": "ঘনত্ব",
+      "futureSidebar": "সাইডবার ডিফল্ট অবস্থা",
+      "futureMotion": "অনিমেশন কমান"
+    },
+    "languages": {
+      "title": "ভাষা",
+      "description": "ইংরেজি ও বাংলা টেক্সট দেখুন ও সম্পাদনা করুন। সংরক্ষণের পর অবিলম্বে প্রয়োগ হয়।",
+      "key": "কী",
+      "english": "ইংরেজি",
+      "bangla": "বাংলা",
+      "addKey": "কী যোগ করুন",
+      "newKeyPlaceholder": "যেমন my.feature.title",
+      "removeRow": "সরান",
+      "applySave": "অনুবাদ সংরক্ষণ",
+      "toastSaved": "অনুবাদ সংরক্ষিত।"
+    }
+  },
+  "toast": {
+    "profileSaved": "প্রোফাইল সংরক্ষিত (নকল)।",
+    "accountSaved": "অ্যাকাউন্ট সেটিংস সংরক্ষিত (নকল)।",
+    "notificationsSaved": "বিজ্ঞপ্তি পছন্দ আপডেট হয়েছে।"
+  },
+  "language": {
+    "en": "ইংরেজি",
+    "bn": "বাংলা"
+  }
+}

@@ -58,19 +58,19 @@ function isAllowed(item: NavItem) {
   <div class="h-full flex flex-col">
     <div class="flex items-center gap-1 border-b border-[var(--border)] px-2 py-2" :class="collapsed ? 'flex-col' : 'justify-between'">
       <AppLogo :collapsed="collapsed" />
-      <Button variant="ghost" size="icon" type="button" :aria-label="collapsed ? 'Expand sidebar' : 'Collapse sidebar'" @click="emit('update:collapsed', !collapsed)">
+      <Button variant="ghost" size="icon" type="button" :aria-label="collapsed ? $t('layout.expandSidebar') : $t('layout.collapseSidebar')" @click="emit('update:collapsed', !collapsed)">
         <ChevronLeft v-if="!collapsed" class="h-4 w-4" />
         <ChevronRight v-else class="h-4 w-4" />
       </Button>
     </div>
-    <nav aria-label="Primary" class="flex flex-col gap-1 overflow-y-auto px-2 py-2">
+    <nav :aria-label="$t('layout.primaryNav')" class="flex flex-col gap-1 overflow-y-auto px-2 py-2">
     <template v-for="item in nav.filter(isAllowed)" :key="itemKey(item)">
       <Collapsible v-if="item.children?.length && !collapsed" :open="Boolean(submenuOpen[itemKey(item)])" @update:open="submenuOpen[itemKey(item)] = $event">
         <template #trigger>
           <div class="flex w-full items-center justify-between gap-2">
             <span class="inline-flex items-center gap-2">
               <component v-if="item.icon" :is="item.icon" class="h-4 w-4" />
-              <span>{{ item.label }}</span>
+            <span>{{ $t(item.label) }}</span>
             </span>
             <ChevronDown class="h-4 w-4" />
           </div>
@@ -83,7 +83,7 @@ function isAllowed(item: NavItem) {
               class="block rounded-[var(--radius-sm)] px-2 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
               @click="emit('navigate', toPath(child))"
             >
-              {{ child.label }}
+              {{ $t(child.label) }}
             </RouterLink>
             <a
               v-else
@@ -91,12 +91,12 @@ function isAllowed(item: NavItem) {
               class="block rounded-[var(--radius-sm)] px-2 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
               @click="emit('navigate', toPath(child))"
             >
-              {{ child.label }}
+              {{ $t(child.label) }}
             </a>
           </template>
         </div>
       </Collapsible>
-      <Tooltip v-else-if="collapsed" :content="item.label" side="right">
+      <Tooltip v-else-if="collapsed" :content="$t(item.label)" side="right">
         <template #trigger>
           <RouterLink
             v-if="hasTo(item)"
@@ -130,7 +130,7 @@ function isAllowed(item: NavItem) {
       >
         <span v-if="isActive(item)" class="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded" />
         <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
-        <span class="truncate">{{ item.label }}</span>
+        <span class="truncate">{{ $t(item.label) }}</span>
         <ChevronRight v-if="item.children?.length" class="ml-auto h-4 w-4" />
       </RouterLink>
       <a
@@ -139,7 +139,7 @@ function isAllowed(item: NavItem) {
         class="relative flex h-10 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm text-[var(--sidebar-text)]/80 hover:text-[var(--sidebar-active-text)]"
       >
         <component v-if="item.icon" :is="item.icon" class="h-4 w-4 shrink-0" />
-        <span class="truncate">{{ item.label }}</span>
+        <span class="truncate">{{ $t(item.label) }}</span>
         <ChevronRight v-if="item.children?.length" class="ml-auto h-4 w-4" />
       </a>
     </template>

@@ -1,0 +1,140 @@
+{
+  "app": {
+    "name": "Sad"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "saasDashboard": "SaaS dashboard",
+    "fintech": "Fintech",
+    "healthcare": "Healthcare",
+    "fleet": "Fleet",
+    "users": "Users",
+    "revenue": "Revenue",
+    "orders": "Orders",
+    "conversion": "Conversion",
+    "settings": "Settings",
+    "uiPlayground": "UI playground"
+  },
+  "meta": {
+    "auth": "Auth",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot password",
+    "resetPassword": "Reset password",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "saasDashboard": "SaaS dashboard",
+    "fintech": "Fintech",
+    "healthcare": "Healthcare",
+    "fleetTracking": "Fleet tracking",
+    "users": "Users",
+    "settings": "Settings",
+    "uiPlayground": "UI playground",
+    "notFound": "Not found"
+  },
+  "topbar": {
+    "openMenu": "Open menu",
+    "openNotifications": "Open notifications",
+    "openUserMenu": "Open user menu",
+    "language": "Language"
+  },
+  "userMenu": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "theme": "Theme",
+    "logout": "Logout",
+    "guestName": "Guest User",
+    "guestEmail": "guest@example.com"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "loading": "Loading...",
+    "emptyTitle": "No notifications",
+    "emptyDescription": "You're all caught up.",
+    "welcomeTitle": "Welcome to the admin template",
+    "themeTitle": "Theme switched successfully",
+    "justNow": "Just now",
+    "fiveMinAgo": "5m ago"
+  },
+  "layout": {
+    "footerRights": "All rights reserved.",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "primaryNav": "Primary"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Overview of usage and health.",
+    "users": "Users",
+    "revenue": "Revenue",
+    "orders": "Orders",
+    "conversion": "Conversion"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Profile, account, and appearance.",
+    "tabs": {
+      "profile": "Profile",
+      "account": "Account",
+      "notifications": "Notifications",
+      "appearance": "Appearance",
+      "languages": "Languages"
+    },
+    "profile": {
+      "avatarHint": "Avatar upload is a mock; paste a URL in a later iteration.",
+      "name": "Name",
+      "email": "Email",
+      "bio": "Bio",
+      "saveProfile": "Save profile"
+    },
+    "account": {
+      "timeZone": "Time zone",
+      "saveAccount": "Save account"
+    },
+    "notifications": {
+      "productTitle": "Product updates",
+      "productDescription": "Occasional news and tips.",
+      "weeklyTitle": "Weekly summary",
+      "weeklyDescription": "Activity digest every Monday.",
+      "securityTitle": "Security alerts",
+      "securityDescription": "Logins and password changes.",
+      "save": "Save notification preferences"
+    },
+    "appearance": {
+      "themeTitle": "Theme",
+      "themeDescription": "Applies immediately across the app.",
+      "previewTitle": "Preview",
+      "previewCard": "Card surface in the current mode.",
+      "previewMuted": "Muted supporting text and inputs.",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "resolved": "Resolved",
+      "futureTitle": "Future",
+      "futureDensity": "Density",
+      "futureSidebar": "Sidebar default state",
+      "futureMotion": "Reduce motion"
+    },
+    "languages": {
+      "title": "Languages",
+      "description": "View and edit English and Bangla strings. Changes apply immediately after save.",
+      "key": "Key",
+      "english": "English",
+      "bangla": "Bangla",
+      "addKey": "Add key",
+      "newKeyPlaceholder": "e.g. my.feature.title",
+      "removeRow": "Remove",
+      "applySave": "Save translations",
+      "toastSaved": "Translations saved."
+    }
+  },
+  "toast": {
+    "profileSaved": "Profile saved (mock).",
+    "accountSaved": "Account settings saved (mock).",
+    "notificationsSaved": "Notification preferences updated."
+  },
+  "language": {
+    "en": "English",
+    "bn": "Bangla"
+  }
+}

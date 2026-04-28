@@ -33,7 +33,7 @@ const version = import.meta.env.VITE_APP_VERSION ?? '0.0.0'
         <RouterView />
       </main>
       <footer class="shrink-0 flex flex-col gap-1 border-t border-[var(--topbar-border)] bg-[var(--footer-bg)] px-4 py-3 text-sm text-[var(--footer-text)] sm:flex-row sm:items-center sm:justify-between">
-        <span>© {{ year }} {{ brand }}. All rights reserved.</span>
+        <span>© {{ year }} {{ brand }}. {{ $t('layout.footerRights') }}</span>
         <span class="sm:text-right">v{{ version }}</span>
       </footer>
     </div>

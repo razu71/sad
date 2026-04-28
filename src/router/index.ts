@@ -3,8 +3,6 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 
-const APP_NAME = 'Sad'
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,7 +13,7 @@ const router = createRouter({
     {
       path: '/auth',
       component: AuthLayout,
-      meta: { title: 'Auth' },
+      meta: { title: 'meta.auth' },
       children: [
         {
           path: '',
@@ -25,32 +23,32 @@ const router = createRouter({
           path: 'login',
           name: 'AuthLogin',
           component: () => import('@/pages/auth/LoginPage.vue'),
-          meta: { title: 'Sign in' },
+          meta: { title: 'meta.signIn' },
         },
         {
           path: 'sign-up',
           name: 'AuthSignUp',
           component: () => import('@/pages/auth/SignUpPage.vue'),
-          meta: { title: 'Sign up' },
+          meta: { title: 'meta.signUp' },
         },
         {
           path: 'forgot-password',
           name: 'AuthForgotPassword',
           component: () => import('@/pages/auth/ForgotPasswordPage.vue'),
-          meta: { title: 'Forgot password' },
+          meta: { title: 'meta.forgotPassword' },
         },
         {
           path: 'reset-password',
           name: 'AuthResetPassword',
           component: () => import('@/pages/auth/ResetPasswordPage.vue'),
-          meta: { title: 'Reset password' },
+          meta: { title: 'meta.resetPassword' },
         },
       ],
     },
     {
       path: '/admin',
       component: AdminLayout,
-      meta: { requiresAuth: true, title: 'Admin' },
+      meta: { requiresAuth: true, title: 'meta.admin' },
       children: [
         {
           path: '',
@@ -61,55 +59,55 @@ const router = createRouter({
           path: 'dashboard',
           name: 'AdminDashboard',
           component: () => import('@/pages/admin/DashboardPage.vue'),
-          meta: { title: 'Dashboard' },
+          meta: { title: 'meta.dashboard' },
         },
         {
           path: 'saas-dashboard',
           name: 'AdminSaaSDashboard',
           component: () => import('@/pages/admin/SaaSDashboardPage.vue'),
-          meta: { title: 'SaaS dashboard' },
+          meta: { title: 'meta.saasDashboard' },
         },
         {
           path: 'fintech-dashboard',
           name: 'AdminFintechDashboard',
           component: () => import('@/pages/admin/FintechDashboardPage.vue'),
-          meta: { title: 'Fintech' },
+          meta: { title: 'meta.fintech' },
         },
         {
           path: 'healthcare-dashboard',
           name: 'AdminHealthcareDashboard',
           component: () => import('@/pages/admin/HealthcareDashboardPage.vue'),
-          meta: { title: 'Healthcare' },
+          meta: { title: 'meta.healthcare' },
         },
         {
           path: 'fleet-tracking',
           name: 'AdminFleetTracking',
           component: () => import('@/pages/admin/FleetTrackingDashboardPage.vue'),
-          meta: { title: 'Fleet tracking' },
+          meta: { title: 'meta.fleetTracking' },
         },
         {
           path: 'users',
           name: 'AdminUsers',
           component: () => import('@/pages/admin/UsersPage.vue'),
-          meta: { title: 'Users' },
+          meta: { title: 'meta.users' },
         },
         {
           path: 'settings',
           name: 'AdminSettings',
           component: () => import('@/pages/admin/SettingsPage.vue'),
-          meta: { title: 'Settings' },
+          meta: { title: 'meta.settings' },
         },
         {
           path: 'ui',
           name: 'AdminUiPlayground',
           component: () => import('@/pages/admin/UiPlaygroundPage.vue'),
-          meta: { title: 'UI playground' },
+          meta: { title: 'meta.uiPlayground' },
         },
         {
           path: ':pathMatch(.*)*',
           name: 'AdminNotFound',
           component: () => import('@/pages/errors/NotFoundPage.vue'),
-          meta: { title: 'Not found' },
+          meta: { title: 'meta.notFound' },
         },
       ],
     },
@@ -117,7 +115,7 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('@/pages/errors/NotFoundPage.vue'),
-      meta: { title: 'Not found' },
+      meta: { title: 'meta.notFound' },
     },
   ],
 })
@@ -138,11 +136,6 @@ router.beforeEach((to) => {
   }
 
   return true
-})
-
-router.afterEach((to) => {
-  const piece = typeof to.meta.title === 'string' ? String(to.meta.title) : ''
-  document.title = piece ? `${piece} · ${APP_NAME}` : APP_NAME
 })
 
 export default router

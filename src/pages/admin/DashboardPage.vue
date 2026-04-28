@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { DollarSign, Percent, ShoppingCart, Users } from 'lucide-vue-next'
 import Card from '@/components/ui/Card.vue'
 import PageHeader from '@/components/app/PageHeader.vue'
@@ -6,7 +7,9 @@ import StatCard from '@/components/app/StatCard.vue'
 import DataTable from '@/components/ui/DataTable.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { getDashboardRevenueChartOptions, getDashboardRevenueSeries } from '@/lib/apex/dashboardRevenueChart'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const revenueChartOptions = getDashboardRevenueChartOptions()
 const revenueChartSeries = getDashboardRevenueSeries()
 
@@ -42,25 +45,25 @@ const topUsers = [
 
     <div class="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatCard
-        label="Users"
+        :label="t('dashboard.users')"
         :value="1284"
         :delta="{ value: '12% vs last week', trend: 'up' }"
         :icon="Users"
       />
       <StatCard
-        label="Revenue"
+        :label="t('dashboard.revenue')"
         :value="'$24.5k'"
         :delta="{ value: '3% vs last week', trend: 'up' }"
         :icon="DollarSign"
       />
       <StatCard
-        label="Orders"
+        :label="t('dashboard.orders')"
         :value="428"
         :delta="{ value: '2% vs last week', trend: 'flat' }"
         :icon="ShoppingCart"
       />
       <StatCard
-        label="Conversion"
+        :label="t('dashboard.conversion')"
         :value="'3.2%'"
         :delta="{ value: '0.4% vs last week', trend: 'down' }"
         :icon="Percent"

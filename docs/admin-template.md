@@ -21,6 +21,7 @@ This document is the implementation roadmap for turning this project into a **fu
 - `@vee-validate/zod` — for zod schema validation
 - `@tanstack/vue-table` — for `DataTable`
 - `vue-multiselect` - for multiselect dropdown
+- `vue-i18n` - for internationalization
 
 ## Non-negotiables
 
@@ -33,6 +34,7 @@ This document is the implementation roadmap for turning this project into a **fu
 - **Icons**: never inline SVGs or static icon files. Always use `lucide-vue-next`.
 - **Imports**: always use the `@/` alias (configured in `vite.config.ts` and `tsconfig.app.json`).
 - **No global event bus**. Cross-component communication uses props/emits, Pinia, or `provide/inject`.
+- **Multilingual**: the application should be multilingual. The default language should be English. The supported languages should be English and Bangla.
 
 ## Folder structure
 
