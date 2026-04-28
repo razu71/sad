@@ -78,8 +78,7 @@
       "profile": "Profile",
       "account": "Account",
       "notifications": "Notifications",
-      "appearance": "Appearance",
-      "languages": "Languages"
+      "appearance": "Appearance"
     },
     "profile": {
       "avatarHint": "Avatar upload is a mock; paste a URL in a later iteration.",
@@ -114,18 +113,6 @@
       "futureDensity": "Density",
       "futureSidebar": "Sidebar default state",
       "futureMotion": "Reduce motion"
-    },
-    "languages": {
-      "title": "Languages",
-      "description": "View and edit English and Bangla strings. Changes apply immediately after save.",
-      "key": "Key",
-      "english": "English",
-      "bangla": "Bangla",
-      "addKey": "Add key",
-      "newKeyPlaceholder": "e.g. my.feature.title",
-      "removeRow": "Remove",
-      "applySave": "Save translations",
-      "toastSaved": "Translations saved."
     }
   },
   "toast": {

@@ -78,8 +78,7 @@
       "profile": "প্রোফাইল",
       "account": "অ্যাকাউন্ট",
       "notifications": "বিজ্ঞপ্তি",
-      "appearance": "চেহারা",
-      "languages": "ভাষা"
+      "appearance": "চেহারা"
     },
     "profile": {
       "avatarHint": "অবতার আপলোড নকল; পরের সংস্করণে URL পেস্ট করুন।",
@@ -114,18 +113,6 @@
       "futureDensity": "ঘনত্ব",
       "futureSidebar": "সাইডবার ডিফল্ট অবস্থা",
       "futureMotion": "অনিমেশন কমান"
-    },
-    "languages": {
-      "title": "ভাষা",
-      "description": "ইংরেজি ও বাংলা টেক্সট দেখুন ও সম্পাদনা করুন। সংরক্ষণের পর অবিলম্বে প্রয়োগ হয়।",
-      "key": "কী",
-      "english": "ইংরেজি",
-      "bangla": "বাংলা",
-      "addKey": "কী যোগ করুন",
-      "newKeyPlaceholder": "যেমন my.feature.title",
-      "removeRow": "সরান",
-      "applySave": "অনুবাদ সংরক্ষণ",
-      "toastSaved": "অনুবাদ সংরক্ষিত।"
     }
   },
   "toast": {
